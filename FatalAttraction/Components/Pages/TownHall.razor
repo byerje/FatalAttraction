@@ -5,7 +5,6 @@
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
 
-
 <PageTitle>Town Hall</PageTitle>
 
 <h1>Town Hall</h1>
@@ -14,19 +13,32 @@
 
 <p>Talk to the mayor, Mrs. Beatrice Langford.</p>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Question</h5>
-        <textarea class="form-control" @bind="@message" @ref="messageInput" @onkeydown="HandleKeyDown"></textarea>
-        <button class="btn btn-primary mt-2" @onclick="Submit">Ask</button>
-        <button class="btn btn-secondary mt-2 ms-2" @onclick="ClearMessage">Clear</button>
+<div style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
+    <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:0.25rem;">
+        <textarea class="form-control" style="flex:1 1 auto; resize:vertical; max-height:20vh;" @bind="message" @ref="messageInput" @onkeydown="HandleKeyDown" placeholder="Type your question and click the Ask button..."></textarea>
+        <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
+            <button class="btn btn-primary" @onclick="Submit">Ask</button>
+            <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
+        </div>
     </div>
-</div>
 
-<div class="card mt-3">
-    <div class="card-body">
-        <h5 class="card-title">Response</h5>
-        <div>@(GetResponseMarkup())</div>
+    <div style="flex:1 1 auto; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:0.5rem; border-radius:0.25rem; background:#fff;" id="historyContainer">
+        @* Render the full conversation history from the local convo list *@
+        @foreach (var (role, content) in convo)
+        {
+            if (role == "system")
+            {
+                <div class="text-muted small mb-2">System: @content</div>
+            }
+            else if (role == "user")
+            {
+                <div class="mb-2"><strong>You:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+            }
+            else
+            {
+                <div class="mb-2"><strong>NPC:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+            }
+        }
     </div>
 </div>
 
@@ -35,6 +47,7 @@
     private string response = string.Empty;
     ChatHistory history = new();
     private ElementReference messageInput;
+    private List<(string role, string content)> convo = new();
     private bool isInteractiveRendered;
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -59,6 +72,7 @@
     private async Task Submit()
     {
         history.AddUserMessage(message);
+        convo.Add(("user", message));
         if (!string.IsNullOrEmpty(message))
         {
             response = "";
@@ -69,6 +83,7 @@
                 StateHasChanged();
             }
             history.AddAssistantMessage(response);
+            convo.Add(("assistant", response));
             await InvokeAsync(StateHasChanged);
             if (isInteractiveRendered)
             {

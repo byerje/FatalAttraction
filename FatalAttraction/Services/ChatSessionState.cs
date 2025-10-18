@@ -33,7 +33,7 @@ Leaving the Theater after rehearsal
             "• Lucas Vale – Innkeeper: Charming but conflicted, was having an affair with Evelyn and feared scandal.\n" +
             "• Hugo Brandt – Blacksmith: Gruff and proud, owed Evelyn money and argued with her before her death.\n" +
             "• Nina Holst – Market Clerk: Observant and chatty, recalls Evelyn buying wine and saying, 'Tonight, it all ends.'\n" +
-            "• Beatrice Langford – Mayor: Authoritative and composed, secretly fears exposure of her husband's affair with Evelyn.\n" +
+            "• Ben Langford – Mayor: Authoritative and composed, secretly fears exposure of her affair with Evelyn.\n" +
             "• Father Thomas Alder – Preacher: Gentle and cryptic, knows confessions related to the murder but speaks in riddles.\n" +
             "• Hazel Dean – Theater Ticket Taker: Shy admirer of Evelyn, saw her leave the theater and a man in a dark coat nearby.\n" +
             "• Officer Grant Miles – Policeman: Fair and logical, leads the investigation and knows more than he lets on.\n" +

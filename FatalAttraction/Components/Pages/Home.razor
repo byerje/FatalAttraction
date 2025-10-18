@@ -10,31 +10,42 @@ Interview each character to uncover motives, lies, and secrets — and ultimatel
 </p>
 <hr />
 <p><b>Police Report Details:</b></p>
-<table class="table table-sm" style="border-collapse:collapse;">
-    <colgroup>
-        <col style="width: 180px;">  <!-- 👈 set your desired width here -->
-        <col>
-    </colgroup>
-    <tbody>
-        <tr>
-            <td class="py-0 text-muted pe-2">Victim</td>
-            <td class="py-0 align-top"><strong>Evelyn Cross</strong></td>
-        </tr>
-        <tr>
-            <td class="py-0 text-muted pe-2">Cause of Death</td>
-            <td class="py-0 align-top"><strong>Blunt trauma to the head</strong></td>
-        </tr>
-        <tr>
-            <td class="py-0 text-muted pe-2">Time of Death</td>
-            <td class="py-0 align-top"><strong>Between 9 PM and midnight</strong></td>
-        </tr>
-        <tr>
-            <td class="py-0 text-muted pe-2">Last seen</td>
-            <td class="py-0 align-top"><strong>Leaving the Theater after rehearsal</strong></td>
-        </tr>
-    </tbody>
-</table>
-<p><b>Town Map - Click where would you like to go:</b></p>
+<div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
+    <!-- Evelyn’s Image -->
+    <img src="images/evelynn.png"
+         alt="Evelyn Cross"
+         style="max-width: 150px; border-radius: 8px; box-shadow: 0 0 8px rgba(0,0,0,0.3);" />
+
+    <!-- Police Report Table -->
+    <table class="table table-sm" style="border-collapse:collapse; flex: 1 1 300px;">
+        <colgroup>
+            <col style="width: 180px;">  <!-- 👈 set your desired width here -->
+            <col>
+        </colgroup>
+        <tbody>
+            <tr>
+                <td class="py-0 text-muted pe-2">Victim</td>
+                <td class="py-0 align-top"><strong>Evelyn Cross</strong></td>
+            </tr>
+            <tr>
+                <td class="py-0 text-muted pe-2">Cause of Death</td>
+                <td class="py-0 align-top"><strong>Blunt trauma to the head</strong></td>
+            </tr>
+            <tr>
+                <td class="py-0 text-muted pe-2">Time of Death</td>
+                <td class="py-0 align-top"><strong>Between 9 PM and midnight</strong></td>
+            </tr>
+            <tr>
+                <td class="py-0 text-muted pe-2">Last seen</td>
+                <td class="py-0 align-top"><strong>Leaving the Theater after rehearsal</strong></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <hr />
+    <p><b>Town Map - Click where would you like to go:</b></p>
+</div>
 <div class="mb-3">
     <img src="images/map.png"
             usemap="#image-map"

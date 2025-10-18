@@ -33,6 +33,7 @@
     private string message = string.Empty;
     private string response = string.Empty;
     ChatHistory history = new();
+    private List<(string role, string content)> convo = new();
     private ElementReference messageInput;
     private bool isInteractiveRendered;
 
@@ -48,13 +49,18 @@
 
     protected override void OnInitialized()
     {
+        // Give background info about the murder
+        history.AddSystemMessage("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Cause of Death: Blunt trauma to the head. Time of Death: Between 9 PM and midnight. Last seen: Leaving the Theater after rehearsal. Theme: Each suspect’s “attraction” (romantic, financial, power, or admiration) drove their behavior.");
+
         // Set the persona for this character
-        history.AddSystemMessage("You are Father Thomas Alder, the preacher. You speak in parables and cryptic phrases. You heard confessions related to the murder but won’t name names directly. Drop poetic hints such as “the truth was spoken beneath the church bell.”");
+        var persona = "You are Father Thomas Alder, the preacher. You speak in parables and cryptic phrases. You heard confessions related to the murder but won’t name names directly. Drop poetic hints such as the truth was spoken beneath the church bell.";
+        history.AddSystemMessage(persona);
     }
 
     private async Task Submit()
     {
-        history.AddUserMessage(message);
+    history.AddUserMessage(message);
+    convo.Add(("user", message));
         if (!string.IsNullOrEmpty(message))
         {
             response = "";
@@ -65,6 +71,7 @@
                 StateHasChanged();
             }
             history.AddAssistantMessage(response);
+            convo.Add(("assistant", response));
             await InvokeAsync(StateHasChanged);
             if (isInteractiveRendered)
             {

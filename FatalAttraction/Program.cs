@@ -13,17 +13,19 @@ var aiConfig = builder.Configuration.GetSection("AI");
 
 builder.Services.AddKernel();
 
-// Validate AI configuration values for Chat Completion
-var aiEndpoint = aiConfig["endpoint"];
-var aiApiKey = aiConfig["apikey"];
+// Read from environment variables first, then fall back to configuration
+var aiEndpoint = Environment.GetEnvironmentVariable("AZURE_OPENAI_ENDPOINT") 
+    ?? aiConfig["endpoint"];
+var aiApiKey = Environment.GetEnvironmentVariable("AZURE_OPENAI_API_KEY") 
+    ?? aiConfig["apikey"];
 
 if (string.IsNullOrWhiteSpace(aiEndpoint))
 {
-    throw new InvalidOperationException("AI endpoint is not configured. Please set the 'AI:endpoint' value in appsettings.json or environment variables.");
+    throw new InvalidOperationException("AI endpoint is not configured. Set the 'AZURE_OPENAI_ENDPOINT' environment variable.");
 }
 if (string.IsNullOrWhiteSpace(aiApiKey))
 {
-    throw new InvalidOperationException("AI apikey is not configured. Please set the 'AI:apikey' value in appsettings.json or environment variables.");
+    throw new InvalidOperationException("AI API key is not configured. Set the 'AZURE_OPENAI_API_KEY' environment variable.");
 }
 
 // Add Azure OpenAI Chat Completion
@@ -31,13 +33,15 @@ builder.Services.AddAzureOpenAIChatCompletion("gpt-4", aiEndpoint, aiApiKey);
 builder.Services.AddScoped<FatalAttraction.Services.ChatSessionState>();
 
 // Configure TTS - Using Azure AI Speech Service (not Azure OpenAI)
-var ttsEndpoint = aiConfig["ttsEndpoint"];
-var ttsApiKey = aiConfig["ttsApiKey"];
+var ttsEndpoint = Environment.GetEnvironmentVariable("AZURE_SPEECH_ENDPOINT") 
+    ?? aiConfig["ttsEndpoint"];
+var ttsApiKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_API_KEY") 
+    ?? aiConfig["ttsApiKey"];
 
 // If TTS endpoint is not configured, throw error since Azure AI Speech requires it
 if (string.IsNullOrWhiteSpace(ttsEndpoint) || string.IsNullOrWhiteSpace(ttsApiKey))
 {
-    throw new InvalidOperationException("TTS endpoint and API key must be configured for Azure AI Speech Service. Set 'AI:ttsEndpoint' and 'AI:ttsApiKey' in appsettings.json.");
+    throw new InvalidOperationException("TTS endpoint and API key must be configured. Set 'AZURE_SPEECH_ENDPOINT' and 'AZURE_SPEECH_API_KEY' environment variables.");
 }
 
 // Configure TTS options for Azure AI Speech Service

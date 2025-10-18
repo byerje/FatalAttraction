@@ -1,0 +1,104 @@
+@page "/library"
+@using Microsoft.SemanticKernel
+@using Microsoft.SemanticKernel.ChatCompletion
+@rendermode InteractiveServer
+@inject Kernel Kernel
+@inject IChatCompletionService ChatService
+
+
+<PageTitle>Library</PageTitle>
+
+<h1>Library</h1>
+
+<img src="/images/librarian.png" alt="Mildred Gray" class="img-fluid rounded float-start me-3 mb-2" style="max-width:200px;" />
+
+<p>Talk to the librarian, Ms. Mildred Gray.</p>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Question</h5>
+        <textarea class="form-control" @bind="@message" @ref="messageInput" @onkeydown="HandleKeyDown"></textarea>
+        <button class="btn btn-primary mt-2" @onclick="Submit">Ask</button>
+        <button class="btn btn-secondary mt-2 ms-2" @onclick="ClearMessage">Clear</button>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title">Response</h5>
+        <div>@(GetResponseMarkup())</div>
+    </div>
+</div>
+
+@code {
+    private string message = string.Empty;
+    private string response = string.Empty;
+    ChatHistory history = new();
+    private ElementReference messageInput;
+    private bool isInteractiveRendered;
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isInteractiveRendered = true;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected override void OnInitialized()
+    {
+        // Set the persona for this character
+        history.AddSystemMessage("You are Mildred Gray, the librarian. You love gossip and believe every story hides a little truth. Speak as though you know everyone’s secrets, even when you don’t. Drop hints about an affair between Evelyn and the inn keeper, Lucas Vale.");
+    }
+
+    private async Task Submit()
+    {
+        history.AddUserMessage(message);
+        if (!string.IsNullOrEmpty(message))
+        {
+            response = "";
+            var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
+            await foreach (var chunk in chunks)
+            {
+                response += chunk;
+                StateHasChanged();
+            }
+            history.AddAssistantMessage(response);
+            await InvokeAsync(StateHasChanged);
+            if (isInteractiveRendered)
+            {
+                await messageInput.FocusAsync();
+            }
+        }
+    }
+
+        private async Task ClearMessage()
+    {
+        message = string.Empty;
+        await InvokeAsync(StateHasChanged);
+        if (isInteractiveRendered)
+        {
+            await messageInput.FocusAsync();
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            await Submit();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private MarkupString GetResponseMarkup()
+    {
+        if (string.IsNullOrWhiteSpace(response))
+            return new MarkupString(string.Empty);
+
+        var html = Markdig.Markdown.ToHtml(response);
+        return new MarkupString(html);
+    }
+}

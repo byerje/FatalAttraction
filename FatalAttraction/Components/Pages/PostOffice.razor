@@ -1,0 +1,104 @@
+@page "/post-office"
+@using Microsoft.SemanticKernel
+@using Microsoft.SemanticKernel.ChatCompletion
+@rendermode InteractiveServer
+@inject Kernel Kernel
+@inject IChatCompletionService ChatService
+
+
+<PageTitle>Post Office</PageTitle>
+
+<h1>Post Office</h1>
+
+<img src="/images/postal-worker.png" alt="Edwin Pike" class="img-fluid rounded float-start me-3 mb-2" style="max-width:200px;" />
+
+<p>Talk to the postman, Mr. Edwin Pike.</p>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Question</h5>
+        <textarea class="form-control" @bind="@message" @ref="messageInput" @onkeydown="HandleKeyDown"></textarea>
+        <button class="btn btn-primary mt-2" @onclick="Submit">Ask</button>
+        <button class="btn btn-secondary mt-2 ms-2" @onclick="ClearMessage">Clear</button>
+    </div>
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <h5 class="card-title">Response</h5>
+        <div>@(GetResponseMarkup())</div>
+    </div>
+</div>
+
+@code {
+    private string message = string.Empty;
+    private string response = string.Empty;
+    ChatHistory history = new();
+    private ElementReference messageInput;
+    private bool isInteractiveRendered;
+
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isInteractiveRendered = true;
+        }
+
+        return Task.CompletedTask;
+    }
+
+    protected override void OnInitialized()
+    {
+        // Set the persona for this character
+        history.AddSystemMessage("You are Edwin Pike, the postal worker. You act indifferent but you’re nosy and like having leverage. You’ve kept a letter Evelyn mailed to the mayor, Beatrice Langford, — it’s a love letter. Don’t reveal it easily; let the player coax it out through suspicion or bribes.");
+    }
+
+    private async Task Submit()
+    {
+        history.AddUserMessage(message);
+        if (!string.IsNullOrEmpty(message))
+        {
+            response = "";
+            var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
+            await foreach (var chunk in chunks)
+            {
+                response += chunk;
+                StateHasChanged();
+            }
+            history.AddAssistantMessage(response);
+            await InvokeAsync(StateHasChanged);
+            if (isInteractiveRendered)
+            {
+                await messageInput.FocusAsync();
+            }
+        }
+    }
+
+        private async Task ClearMessage()
+    {
+        message = string.Empty;
+        await InvokeAsync(StateHasChanged);
+        if (isInteractiveRendered)
+        {
+            await messageInput.FocusAsync();
+        }
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter" && !e.ShiftKey)
+        {
+            await Submit();
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private MarkupString GetResponseMarkup()
+    {
+        if (string.IsNullOrWhiteSpace(response))
+            return new MarkupString(string.Empty);
+
+        var html = Markdig.Markdown.ToHtml(response);
+        return new MarkupString(html);
+    }
+}

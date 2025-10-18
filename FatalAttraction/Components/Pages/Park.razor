@@ -5,7 +5,6 @@
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
 
-
 <PageTitle>Park</PageTitle>
 
 <h1>Park</h1>
@@ -14,12 +13,32 @@
 
 <p>Talk to the policeman, Officer Grant Miles.</p>
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Question</h5>
-        <textarea class="form-control" @bind="@message" @ref="messageInput" @onkeydown="HandleKeyDown"></textarea>
-        <button class="btn btn-primary mt-2" @onclick="Submit">Ask</button>
-        <button class="btn btn-secondary mt-2 ms-2" @onclick="ClearMessage">Clear</button>
+<div style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
+    <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:0.25rem;">
+        <textarea class="form-control" style="flex:1 1 auto; resize:vertical; max-height:20vh;" @bind="message" @ref="messageInput" @onkeydown="HandleKeyDown" placeholder="Type your question and click the Ask button..."></textarea>
+        <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
+            <button class="btn btn-primary" @onclick="Submit">Ask</button>
+            <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
+        </div>
+    </div>
+
+    <div style="flex:1 1 auto; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:0.5rem; border-radius:0.25rem; background:#fff;" id="historyContainer">
+        @* Render the full conversation history from the local convo list *@
+        @foreach (var (role, content) in convo)
+        {
+            if (role == "system")
+            {
+                <div class="text-muted small mb-2">System: @content</div>
+            }
+            else if (role == "user")
+            {
+                <div class="mb-2"><strong>You:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+            }
+            else
+            {
+                <div class="mb-2"><strong>NPC:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+            }
+        }
     </div>
 </div>
 
@@ -35,6 +54,7 @@
     private string response = string.Empty;
     ChatHistory history = new();
     private ElementReference messageInput;
+    private List<(string role, string content)> convo = new();
     private bool isInteractiveRendered;
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -53,13 +73,14 @@
         history.AddSystemMessage("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Cause of Death: Blunt trauma to the head. Time of Death: Between 9 PM and midnight. Last seen: Leaving the Theater after rehearsal. Theme: Each suspect’s “attraction” (romantic, financial, power, or admiration) drove their behavior.");
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Officer Grant Miles, the town’s policeman. You respond objectively when players accuse someone. If they correctly name the banker, Martin Harlow, you confirm: “That’s right. The prints on the wrench match the banker’s. He killed her — and love was his undoing.”");
+        history.AddSystemMessage("You are Officer Grant Miles, the town’s policeman. You respond objectively when players accuse someone. If they correctly name the banker, Martin Harlow, you confirm: \"That’s right. The prints on the wrench match the banker’s. He killed her — and love was his undoing.\"");
     }
 
     private async Task Submit()
     {
         history.AddUserMessage(message);
-        if (!string.IsNullOrEmpty(message))
+        convo.Add(("user", message));
+         if (!string.IsNullOrEmpty(message))
         {
             response = "";
             var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
@@ -69,6 +90,7 @@
                 StateHasChanged();
             }
             history.AddAssistantMessage(response);
+            convo.Add(("assistant", response));
             await InvokeAsync(StateHasChanged);
             if (isInteractiveRendered)
             {

@@ -5,6 +5,7 @@
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
 @inject FatalAttraction.Services.ChatSessionState ChatState
+@inject IJSRuntime JS
 
 <PageTitle>Park</PageTitle>
 
@@ -15,6 +16,14 @@
 <p>Talk to the policeman, Officer Grant Miles.</p>
 
 <div style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
+    @if (!string.IsNullOrEmpty(ttsError))
+    {
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            @ttsError
+            <button type="button" class="btn-close" @onclick="() => ttsError = null"></button>
+        </div>
+    }
+    
     <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:0.25rem;">
         <textarea class="form-control"
           style="flex:1 1 auto; resize:vertical; max-height:20vh;"
@@ -83,6 +92,9 @@
         get => ChatState.Notes;
         set => ChatState.Notes = value ?? string.Empty;
     }
+    private string selectedVoice = "onyx";  @* Male officer - authoritative *@
+    private float speed = 1.0f;
+    private string? ttsError = null;
 
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -121,6 +133,7 @@
                 await ClearMessage();
 
                 response = "";
+                ttsError = null;
                 var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
                 await foreach (var chunk in chunks)
                 {
@@ -131,6 +144,10 @@
                 history.AddAssistantMessage(response);
                 convo.Add(("assistant", response));
                 await InvokeAsync(StateHasChanged);
+                
+                // Play the speech after response is complete
+                await PlaySpeech(response);
+                
                 if (isInteractiveRendered)
                 {
                     await messageInput.FocusAsync();
@@ -139,6 +156,23 @@
             catch
             {
                 convo.Add(("system", "There was an issue processing your message, please try again."));
+            }
+        }
+    }
+
+    private async Task PlaySpeech(string textToSpeak)
+    {
+        if (!string.IsNullOrWhiteSpace(textToSpeak))
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("ttsPlayer.play", textToSpeak, selectedVoice, speed);
+            }
+            catch (Exception ex)
+            {
+                ttsError = $"TTS Error: {ex.Message}";
+                Console.WriteLine($"TTS Error: {ex}");
+                StateHasChanged();
             }
         }
     }

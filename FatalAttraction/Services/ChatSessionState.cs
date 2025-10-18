@@ -38,7 +38,8 @@ Leaving the Theater after rehearsal
             "• Hazel Dean – Theater Ticket Taker: Shy admirer of Evelyn, saw her leave the theater and a man in a dark coat nearby.\n" +
             "• Officer Grant Miles – Policeman: Fair and logical, leads the investigation and knows more than he lets on.\n" +
             "• Lydia Rowe – Teacher: Compassionate and insightful, discovered Evelyn planned to leave town that night.\n\n" +
-            "Each resident has their own suspicions and observations. Some protect secrets, others seek truth — but only one of them is the killer.");        
+            "Each resident has their own suspicions and observations. Some protect secrets, others seek truth — but only one of them is the killer.");
+        Prompts.Add("Don't be long-winded in your response. Focus on the character's motives and motivations. Don't be afraid to ask follow-up questions. Remember, the player is trying to uncover the killer's motives and motivations.");
     }
 
 

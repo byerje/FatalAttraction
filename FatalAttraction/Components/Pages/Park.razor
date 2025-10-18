@@ -24,8 +24,8 @@
           @onkeydown="HandleKeyDown"
           placeholder="Type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
-            <button class="btn btn-primary" @onclick="Submit">Ask</button>
-            <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
+            <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
+            <button class="btn btn-secondary" style="white-space:nowrap;" @onclick="ClearMessage">Clear</button>
         </div>
     </div>
 
@@ -71,25 +71,19 @@
     </div>
 </div>
 
-<div class="card mt-3">
-    <div class="card-body">
-        <h5 class="card-title">Response</h5>
-        <div>@(GetResponseMarkup())</div>
-    </div>
-</div>
-
 @code {
     private string message = string.Empty;
     private string response = string.Empty;
     ChatHistory history = new();
-    private ElementReference messageInput;
     private List<(string role, string content)> convo = new();
+    private ElementReference messageInput;
     private bool isInteractiveRendered;
     private string Notes
     {
         get => ChatState.Notes;
         set => ChatState.Notes = value ?? string.Empty;
     }
+
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {

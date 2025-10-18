@@ -3,7 +3,18 @@ namespace FatalAttraction.Services;
 public class ChatSessionState
 {
     public Dictionary<string, List<(string role, string content)>> Conversations { get; } = new();
-    public string Notes { get; set; } = string.Empty;
+    public string Notes { get; set; } =  @"Victim: 
+Evelyn Cross
+
+Cause of Death:
+Blunt trauma to the head
+
+Time of Death:
+Between 9 PM and midnight
+
+Last seen:
+Leaving the Theater after rehearsal
+";
 
     public List<string> Prompts { get; set; } = new();
 

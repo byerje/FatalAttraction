@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using FatalAttraction.Services
+@inject FatalAttraction.Services.ChatSessionState ChatState
 
 <PageTitle>Home</PageTitle>
 
@@ -66,3 +68,11 @@ Interview each character to uncover motives, lies, and secrets — and ultimatel
     <area target="" alt="" title="Theater" href="theater" coords="37,13,77,2,133,16,153,81,143,100,56,106,12,69" shape="poly">
     <area target="" alt="" title="Town Hall" href="townhall" coords="247,113,246,169,224,193,258,229,330,227,372,214,398,127,340,113,292,93" shape="poly">
 </map>
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+}

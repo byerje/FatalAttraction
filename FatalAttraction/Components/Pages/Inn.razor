@@ -106,7 +106,7 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Mrs. Lucas Vale, the inn receptionist. You’re charming and smooth, but defensive if accused. You were having an affair with Evelyn Cross's husband. Deny it at first, but slip up if questioned cleverly. You feared she would tell the mayor, Ben Langford.");
+        history.AddSystemMessage("You are Mrs. Lucas Vale, the inn receptionist. You’re charming and smooth, but defensive if accused. You were having an affair with Evelyn Cross. Deny it at first, but slip up if questioned cleverly. You feared she would tell the mayor, Ben Langford.");
     }
 
     private async Task Submit()
@@ -137,7 +137,7 @@
             }
             catch
             {
-                convo.Add(("assistant", "There was an issue processing your message, please try again."));
+                convo.Add(("system", "There was an issue processing your message, please try again."));
             }
         }
     }

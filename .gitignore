@@ -10,6 +10,7 @@
 # Environment variables with secrets
 .env
 test-tts-deployment.ps1
+**/Properties/launchSettings.json
 
 # Build results
 [Dd]ebug/

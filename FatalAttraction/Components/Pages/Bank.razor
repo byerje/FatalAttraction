@@ -23,6 +23,7 @@
     </div>
 
     <div style="flex:1 1 auto; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:0.5rem; border-radius:0.25rem; background:#fff;" id="historyContainer">
+        @* Render the full conversation history from the local convo list *@
         @foreach (var (role, content) in convo)
         {
             if (role == "system")
@@ -71,6 +72,7 @@
     private async Task Submit()
     {
         history.AddUserMessage(message);
+        convo.Add(("user", message));
         if (!string.IsNullOrEmpty(message))
         {
             response = "";
@@ -81,6 +83,7 @@
                 StateHasChanged();
             }
             history.AddAssistantMessage(response);
+            convo.Add(("assistant", response));            
             await InvokeAsync(StateHasChanged);
             if (isInteractiveRendered)
             {

@@ -24,8 +24,8 @@
           @onkeydown="HandleKeyDown"
           placeholder="Type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
-            <button class="btn btn-primary" @onclick="Submit">Ask</button>
-            <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
+            <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
+            <button class="btn btn-secondary" style="white-space:nowrap;" @onclick="ClearMessage">Clear</button>
         </div>
     </div>
 
@@ -71,25 +71,19 @@
     </div>
 </div>
 
-<div class="card mt-3">
-    <div class="card-body">
-        <h5 class="card-title">Response</h5>
-        <div>@(GetResponseMarkup())</div>
-    </div>
-</div>
-
 @code {
     private string message = string.Empty;
     private string response = string.Empty;
     ChatHistory history = new();
-    private ElementReference messageInput;
     private List<(string role, string content)> convo = new();
+    private ElementReference messageInput;
     private bool isInteractiveRendered;
     private string Notes
     {
         get => ChatState.Notes;
         set => ChatState.Notes = value ?? string.Empty;
     }
+
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -106,8 +100,11 @@
         // Retrieve any previous conversation
         convo = ChatState.GetOrCreateConvo("police");
 
-        // Give background info about the murder
-        history.AddSystemMessage("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Cause of Death: Blunt trauma to the head. Time of Death: Between 9 PM and midnight. Last seen: Leaving the Theater after rehearsal. Theme: Each suspect’s “attraction” (romantic, financial, power, or admiration) drove their behavior.");
+        // Give shared background
+        foreach(var prompt in ChatState.Prompts)
+        {
+            history.AddSystemMessage(prompt);
+        }
 
         // Set the persona for this character
         history.AddSystemMessage("You are Officer Grant Miles, the town’s policeman. You respond objectively when players accuse someone. If they correctly name the banker, Martin Harlow, you confirm: \"That’s right. The prints on the wrench match the banker’s. He killed her — and love was his undoing.\"");

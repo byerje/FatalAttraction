@@ -9,6 +9,7 @@
 
 # Environment variables with secrets
 .env
+test-tts-deployment.ps1
 
 # Build results
 [Dd]ebug/

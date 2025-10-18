@@ -108,26 +108,34 @@
 
     private async Task Submit()
     {
-        history.AddUserMessage(message);
-        convo.Add(("user", message));
         if (!string.IsNullOrEmpty(message))
         {
-            response = "";
-            var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
-            await foreach (var chunk in chunks)
+            try
             {
-                response += chunk;
-                StateHasChanged();
+                history.AddUserMessage(message);
+                convo.Add(("user", message));
+                await ClearMessage();
+
+                response = "";
+                var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
+                await foreach (var chunk in chunks)
+                {
+                    response += chunk;
+                    StateHasChanged();
+                }
+                
+                history.AddAssistantMessage(response);
+                convo.Add(("assistant", response));
+                await InvokeAsync(StateHasChanged);
+                if (isInteractiveRendered)
+                {
+                    await messageInput.FocusAsync();
+                }
             }
-            history.AddAssistantMessage(response);
-            convo.Add(("assistant", response));
-            await InvokeAsync(StateHasChanged);
-            if (isInteractiveRendered)
+            catch
             {
-                await messageInput.FocusAsync();
+                convo.Add(("assistant", "There was an issue processing your message, please try again."));
             }
-        
-            await ClearMessage();
         }
     }
 

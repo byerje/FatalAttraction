@@ -36,7 +36,7 @@
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" @onclick="Submit">Ask</button>
             <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
-            <button class="btn btn-danger" @onclick="StopSpeech">Stop Speaking</button>
+            <button class="btn btn-danger" @onclick="StopSpeech">Stop</button>
         </div>
     </div>
 
@@ -95,7 +95,7 @@
         set => ChatState.Notes = value ?? string.Empty;
     }
     private string selectedVoice = "shimmer";  @* Female librarian - older woman, higher voice *@
-    private float speed = 0.85f;
+    private float speed = 0.9f;
     private string? ttsError = null;
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -167,6 +167,7 @@
         {
             try
             {
+                await StopSpeech();
                 await JS.InvokeVoidAsync("ttsPlayer.play", textToSpeak, selectedVoice, speed);
             }
             catch (Exception ex)

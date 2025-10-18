@@ -36,7 +36,7 @@
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" @onclick="Submit">Ask</button>
             <button class="btn btn-secondary" @onclick="ClearMessage">Clear</button>
-            <button class="btn btn-danger" @onclick="StopSpeech">Stop Speaking</button>
+            <button class="btn btn-danger" @onclick="StopSpeech">Stop</button>
         </div>
     </div>
 
@@ -167,6 +167,7 @@
         {
             try
             {
+                await StopSpeech();
                 await JS.InvokeVoidAsync("ttsPlayer.play", textToSpeak, selectedVoice, speed);
             }
             catch (Exception ex)

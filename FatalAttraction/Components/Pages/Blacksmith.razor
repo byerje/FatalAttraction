@@ -36,7 +36,7 @@
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
             <button class="btn btn-secondary" style="white-space:nowrap;" @onclick="ClearMessage">Clear</button>
-            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop Speaking</button>
+            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop</button>
         </div>
     </div>
 
@@ -95,7 +95,7 @@
         set => ChatState.Notes = value ?? string.Empty;
     }
     private string selectedVoice = "onyx";  @* Male blacksmith - deep, gruff voice *@
-    private float speed = 0.85f;
+    private float speed = 1.0f;
     private string? ttsError = null;
 
 
@@ -168,6 +168,7 @@
         {
             try
             {
+                await StopSpeech();
                 await JS.InvokeVoidAsync("ttsPlayer.play", textToSpeak, selectedVoice, speed);
             }
             catch (Exception ex)

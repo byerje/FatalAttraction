@@ -1,6 +1,7 @@
 @page "/bank"
 @using Microsoft.SemanticKernel
 @using Microsoft.SemanticKernel.ChatCompletion
+@implements IDisposable
 @rendermode InteractiveServer
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
@@ -35,6 +36,7 @@
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
             <button class="btn btn-secondary" style="white-space:nowrap;" @onclick="ClearMessage">Clear</button>
+            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop Speaking</button>
         </div>
     </div>
 
@@ -176,6 +178,24 @@
                 StateHasChanged();
             }
         }
+    }
+
+    private async Task StopSpeech()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("ttsPlayer.stop");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Stop TTS Error: {ex}");
+        }
+    }
+
+    public async void Dispose()
+    {
+        // Stop audio when navigating away from the page
+        await StopSpeech();
     }
 
     private async Task ClearMessage()

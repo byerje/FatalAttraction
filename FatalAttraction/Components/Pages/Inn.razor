@@ -15,7 +15,13 @@
 
 <div style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
     <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:0.25rem;">
-        <textarea class="form-control" style="flex:1 1 auto; resize:vertical; max-height:20vh;" @bind="message" @ref="messageInput" @onkeydown="HandleKeyDown" placeholder="Type your question and click the Ask button..."></textarea>
+        <textarea class="form-control"
+          style="flex:1 1 auto; resize:vertical; max-height:20vh;"
+          @bind="message"
+          @bind:event="oninput"
+          @ref="messageInput"
+          @onkeydown="HandleKeyDown"
+          placeholder="Type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
             <button class="btn btn-secondary" style="white-space:nowrap;" @onclick="ClearMessage">Clear</button>

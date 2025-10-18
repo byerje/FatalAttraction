@@ -93,7 +93,7 @@
         set => ChatState.Notes = value ?? string.Empty;
     }
     private string selectedVoice = "nova";  @* Female theater worker - energetic, young *@
-    private float speed = 1.1f;
+    private float speed = 1.0f;
     private string? ttsError = null;
 
     protected override Task OnAfterRenderAsync(bool firstRender)

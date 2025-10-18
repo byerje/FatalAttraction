@@ -92,8 +92,8 @@
         get => ChatState.Notes;
         set => ChatState.Notes = value ?? string.Empty;
     }
-    private string selectedVoice = "nova";  @* Female librarian - scholarly, slower *@
-    private float speed = 0.9f;
+    private string selectedVoice = "shimmer";  @* Female librarian - older woman, higher voice *@
+    private float speed = 0.85f;
     private string? ttsError = null;
 
     protected override Task OnAfterRenderAsync(bool firstRender)

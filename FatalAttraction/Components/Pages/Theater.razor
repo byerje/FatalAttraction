@@ -4,6 +4,7 @@
 @rendermode InteractiveServer
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
+@inject FatalAttraction.Services.ChatSessionState ChatState
 
 <PageTitle>Theater</PageTitle>
 
@@ -28,23 +29,45 @@
         </div>
     </div>
 
-    <div style="flex:1 1 auto; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:0.5rem; border-radius:0.25rem; background:#fff;" id="historyContainer">
-        @* Render the full conversation history from the local convo list *@
-        @foreach (var (role, content) in convo.AsEnumerable().Reverse())
-        {
-            if (role == "system")
-            {
-                <div class="text-muted small mb-2">System: @content</div>
-            }
-            else if (role == "user")
-            {
-                <div class="mb-2"><strong>You:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
-            }
-            else
-            {
-                <div class="mb-2"><strong>NPC:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
-            }
-        }
+    <!-- Two-column region: Conversation (left) + Case Notes (right) -->
+    <div style="flex:1 1 auto; display:flex; gap:0.75rem; min-height:0;">
+        <!-- Conversation Card -->
+        <div class="card shadow-sm" style="flex:2 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
+            <div class="card-header fw-semibold">
+                Conversation History:
+            </div>
+            <div class="card-body" style="overflow:auto; flex:1 1 auto; padding:0.75rem; background-color:#fff;" id="historyContainer">
+                @foreach (var (role, content) in convo.AsEnumerable().Reverse())
+                {
+                    if (role == "system")
+                    {
+                        <div class="text-muted small mb-2">System: @content</div>
+                    }
+                    else if (role == "user")
+                    {
+                        <div class="mb-2"><strong>You:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+                    }
+                    else
+                    {
+                        <div class="mb-2"><strong>NPC:</strong> @((MarkupString)Markdig.Markdown.ToHtml(content))</div>
+                    }
+                }
+            </div>
+        </div>
+
+        <!-- Case Notes Card -->
+        <div class="card shadow-sm" style="flex:1 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
+            <div class="card-header fw-semibold">
+                Case Notes:
+            </div>
+            <div class="card-body" style="display:flex; flex-direction:column; gap:0.5rem; padding:0.75rem;">
+                <textarea class="form-control"
+                        style="flex:1 1 auto; min-height:8rem; resize:vertical;"
+                        @bind="Notes"
+                        @bind:event="oninput"
+                        placeholder="Write notes you want to see on every page..."></textarea>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -55,6 +78,11 @@
     private ElementReference messageInput;
     private List<(string role, string content)> convo = new();
     private bool isInteractiveRendered;
+    private string Notes
+    {
+        get => ChatState.Notes;
+        set => ChatState.Notes = value ?? string.Empty;
+    }
 
     protected override Task OnAfterRenderAsync(bool firstRender)
     {
@@ -68,6 +96,9 @@
 
     protected override void OnInitialized()
     {
+        // Retrieve any previous conversation
+        convo = ChatState.GetOrCreateConvo("theaterhost");
+
         // Give background info about the murder
         history.AddSystemMessage("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Cause of Death: Blunt trauma to the head. Time of Death: Between 9 PM and midnight. Last seen: Leaving the Theater after rehearsal. Theme: Each suspect’s “attraction” (romantic, financial, power, or admiration) drove their behavior.");
 
@@ -77,26 +108,34 @@
 
     private async Task Submit()
     {
-        history.AddUserMessage(message);
-        convo.Add(("user", message));
         if (!string.IsNullOrEmpty(message))
         {
-            response = "";
-            var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
-            await foreach (var chunk in chunks)
+            try
             {
-                response += chunk;
-                StateHasChanged();
+                history.AddUserMessage(message);
+                convo.Add(("user", message));
+                await ClearMessage();
+
+                response = "";
+                var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
+                await foreach (var chunk in chunks)
+                {
+                    response += chunk;
+                    StateHasChanged();
+                }
+                
+                history.AddAssistantMessage(response);
+                convo.Add(("assistant", response));
+                await InvokeAsync(StateHasChanged);
+                if (isInteractiveRendered)
+                {
+                    await messageInput.FocusAsync();
+                }
             }
-            history.AddAssistantMessage(response);
-            convo.Add(("assistant", response));
-            await InvokeAsync(StateHasChanged);
-            if (isInteractiveRendered)
+            catch
             {
-                await messageInput.FocusAsync();
+                convo.Add(("assistant", "There was an issue processing your message, please try again."));
             }
-        
-            await ClearMessage();
         }
     }
 

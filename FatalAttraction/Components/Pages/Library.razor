@@ -24,7 +24,7 @@
 
     <div style="flex:1 1 auto; overflow:auto; border:1px solid rgba(0,0,0,0.06); padding:0.5rem; border-radius:0.25rem; background:#fff;" id="historyContainer">
         @* Render the full conversation history from the local convo list *@
-        @foreach (var (role, content) in convo)
+        @foreach (var (role, content) in convo.AsEnumerable().Reverse())
         {
             if (role == "system")
             {
@@ -89,10 +89,11 @@
             {
                 await messageInput.FocusAsync();
             }
+            await ClearMessage();
         }
     }
 
-        private async Task ClearMessage()
+    private async Task ClearMessage()
     {
         message = string.Empty;
         await InvokeAsync(StateHasChanged);

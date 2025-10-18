@@ -23,6 +23,7 @@ if (string.IsNullOrWhiteSpace(aiApiKey))
 }
 
 builder.Services.AddAzureOpenAIChatCompletion("gpt-4", aiEndpoint, aiApiKey);
+builder.Services.AddScoped<FatalAttraction.Services.ChatSessionState>();
 
 var app = builder.Build();
 

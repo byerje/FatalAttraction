@@ -4,6 +4,7 @@
 @rendermode InteractiveServer
 @inject Kernel Kernel
 @inject IChatCompletionService ChatService
+@inject FatalAttraction.Services.ChatSessionState ChatState
 
 <PageTitle>Post Office</PageTitle>
 
@@ -68,6 +69,9 @@
 
     protected override void OnInitialized()
     {
+        // Retrieve any previous conversation
+        convo = ChatState.GetOrCreateConvo("mailman");
+
         // Give background info about the murder
         history.AddSystemMessage("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Cause of Death: Blunt trauma to the head. Time of Death: Between 9 PM and midnight. Last seen: Leaving the Theater after rehearsal. Theme: Each suspect’s “attraction” (romantic, financial, power, or admiration) drove their behavior.");
 

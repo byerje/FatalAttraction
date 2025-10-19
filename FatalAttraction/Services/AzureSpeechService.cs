@@ -31,16 +31,23 @@ public class AzureSpeechService
             var region = string.IsNullOrWhiteSpace(_options.Region) ? "westus3" : _options.Region;
             var voiceName = MapVoiceToAzureVoice(voice);
             
-            // Build the REST API endpoint
+            // For Azure AI Foundry (multi-service) resources
             var endpoint = $"https://{region}.tts.speech.microsoft.com/cognitiveservices/v1";
+            
+            // Log for debugging (remove in production)
+            Console.WriteLine($"TTS Request - Region: {region}, Voice: {voiceName}, Endpoint: {endpoint}");
+            Console.WriteLine($"TTS API Key length: {_options.ApiKey.Length} chars, first 10: {_options.ApiKey.Substring(0, Math.Min(10, _options.ApiKey.Length))}...");
             
             // Build SSML
             var ssml = BuildSsml(text, voiceName, speed);
             
             // Create request
             var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+            // Azure AI Foundry multi-service requires both key and region headers
             request.Headers.Add("Ocp-Apim-Subscription-Key", _options.ApiKey);
+            request.Headers.Add("Ocp-Apim-Subscription-Region", region);
             request.Headers.Add("X-Microsoft-OutputFormat", "audio-16khz-32kbitrate-mono-mp3");
+            request.Headers.Add("User-Agent", "FatalAttraction");
             request.Content = new StringContent(ssml, Encoding.UTF8, "application/ssml+xml");
             
             var response = await _httpClient.SendAsync(request);

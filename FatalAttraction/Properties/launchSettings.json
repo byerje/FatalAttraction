@@ -15,11 +15,7 @@
         "launchBrowser": true,
         "applicationUrl": "http://localhost:5102",
         "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Development",
-          "AZURE_OPENAI_ENDPOINT": "https://esm-chat-hello-ai.openai.azure.com/",
-          "AZURE_OPENAI_API_KEY": "6a09d04c421847219aeb63d32a5d241d",
-          "AZURE_SPEECH_ENDPOINT": "https://byerj-mgwqvsgi-westus3.services.ai.azure.com/models",
-          "AZURE_SPEECH_API_KEY": "3qi10V9Orb9htjNYRq512TYnS8roUtueSYcBOzgsqqC0iVNrivT4JQQJ99BJACMsfrFXJ3w3AAAAACOGTR2a"
+          "ASPNETCORE_ENVIRONMENT": "Development"
         }
       },
       "https": {
@@ -28,22 +24,14 @@
         "launchBrowser": true,
         "applicationUrl": "https://localhost:7110;http://localhost:5102",
         "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Development",
-          "AZURE_OPENAI_ENDPOINT": "https://esm-chat-hello-ai.openai.azure.com/",
-          "AZURE_OPENAI_API_KEY": "6a09d04c421847219aeb63d32a5d241d",
-          "AZURE_SPEECH_ENDPOINT": "https://byerj-mgwqvsgi-westus3.services.ai.azure.com/models",
-          "AZURE_SPEECH_API_KEY": "3qi10V9Orb9htjNYRq512TYnS8roUtueSYcBOzgsqqC0iVNrivT4JQQJ99BJACMsfrFXJ3w3AAAAACOGTR2a"
+          "ASPNETCORE_ENVIRONMENT": "Development"
         }
       },
       "IIS Express": {
         "commandName": "IISExpress",
         "launchBrowser": true,
         "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Development",
-          "AZURE_OPENAI_ENDPOINT": "https://esm-chat-hello-ai.openai.azure.com/",
-          "AZURE_OPENAI_API_KEY": "6a09d04c421847219aeb63d32a5d241d",
-          "AZURE_SPEECH_ENDPOINT": "https://byerj-mgwqvsgi-westus3.services.ai.azure.com/models",
-          "AZURE_SPEECH_API_KEY": "3qi10V9Orb9htjNYRq512TYnS8roUtueSYcBOzgsqqC0iVNrivT4JQQJ99BJACMsfrFXJ3w3AAAAACOGTR2a"
+          "ASPNETCORE_ENVIRONMENT": "Development"
         }
       }
     }

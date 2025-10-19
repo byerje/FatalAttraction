@@ -108,7 +108,10 @@
         Console.WriteLine("ReadIntro button clicked");
         Console.WriteLine($"Intro text length: {introText?.Length ?? 0}");
         Console.WriteLine($"Voice: {selectedVoice}, Speed: {speed}");
-        await PlaySpeech(introText);
+        if (!string.IsNullOrEmpty(introText))
+        {
+            await PlaySpeech(introText);
+        }
     }
 
     private async Task PlaySpeech(string textToSpeak)

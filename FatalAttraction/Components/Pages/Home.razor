@@ -1,15 +1,25 @@
 ﻿@page "/"
+@rendermode InteractiveServer
 @using FatalAttraction.Services
 @inject FatalAttraction.Services.ChatSessionState ChatState
+@inject IJSRuntime JS
+@implements IDisposable
 
 <PageTitle>Home</PageTitle>
 
 <h1>Fatal Attraction!</h1>
-<p>
-In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn.
-The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone’s hiding something.
-Interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Talk to the various town residents to uncover clues and make choices that will determine your fate. Good luck!
-</p>
+
+@* Display the story introduction text *@
+<p>@introText</p>
+
+<div style="margin-bottom: 1rem;">
+    <button class="btn btn-primary" @onclick="ReadIntro">Read Intro</button>
+    <button class="btn btn-danger" @onclick="StopSpeech">Stop</button>
+    @if (!string.IsNullOrEmpty(ttsError))
+    {
+        <div class="alert alert-danger mt-2">@ttsError</div>
+    }
+</div>
 <hr />
 <p><b>Police Report Details:</b></p>
 <div style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap;">
@@ -70,9 +80,90 @@ Interview each character to uncover motives, lies, and secrets — and ultimatel
 </map>
 
 @code {
+    private string selectedVoice = "onyx"; // Narrator voice
+    private float speed = 0.95f;
+    private string? ttsError = null;
+    private bool isRendered = false;
+
+    private string introText = "In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. " +
+                               "The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something. " +
+                               "Interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. Talk to the various town residents to uncover clues and make choices that will determine your fate. Good luck!";
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
     }
 
+    protected override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            isRendered = true;
+        }
+        return Task.CompletedTask;
+    }
+
+    private async Task ReadIntro()
+    {
+        Console.WriteLine("ReadIntro button clicked");
+        Console.WriteLine($"Intro text length: {introText?.Length ?? 0}");
+        Console.WriteLine($"Voice: {selectedVoice}, Speed: {speed}");
+        await PlaySpeech(introText);
+    }
+
+    private async Task PlaySpeech(string textToSpeak)
+    {
+        Console.WriteLine($"PlaySpeech called with text length: {textToSpeak?.Length ?? 0}");
+        if (!string.IsNullOrWhiteSpace(textToSpeak) && isRendered)
+        {
+            try
+            {
+                Console.WriteLine("Calling StopSpeech...");
+                await StopSpeech();
+                Console.WriteLine("Calling JS ttsPlayer.play...");
+                await JS.InvokeVoidAsync("ttsPlayer.play", textToSpeak, selectedVoice, speed);
+                Console.WriteLine("JS ttsPlayer.play completed");
+            }
+            catch (Exception ex)
+            {
+                ttsError = $"TTS Error: {ex.Message}";
+                Console.WriteLine($"TTS Error: {ex}");
+                StateHasChanged();
+            }
+        }
+        else
+        {
+            Console.WriteLine($"Text to speak is null or whitespace, or not rendered yet. isRendered: {isRendered}");
+        }
+    }
+
+    private async Task StopSpeech()
+    {
+        if (!isRendered) return;
+        
+        try
+        {
+            await JS.InvokeVoidAsync("ttsPlayer.stop");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error stopping speech: {ex}");
+        }
+    }
+
+    public void Dispose()
+    {
+        // Stop any playing audio when navigating away
+        if (isRendered)
+        {
+            Task.Run(async () =>
+            {
+                try
+                {
+                    await StopSpeech();
+                }
+                catch { /* Ignore errors during disposal */ }
+            });
+        }
+    }
 }

@@ -34,10 +34,6 @@ public class AzureSpeechService
             // For Azure AI Foundry (multi-service) resources
             var endpoint = $"https://{region}.tts.speech.microsoft.com/cognitiveservices/v1";
             
-            // Log for debugging (remove in production)
-            Console.WriteLine($"TTS Request - Region: {region}, Voice: {voiceName}, Endpoint: {endpoint}");
-            Console.WriteLine($"TTS API Key length: {_options.ApiKey.Length} chars, first 10: {_options.ApiKey.Substring(0, Math.Min(10, _options.ApiKey.Length))}...");
-            
             // Build SSML
             var ssml = BuildSsml(text, voiceName, speed);
             

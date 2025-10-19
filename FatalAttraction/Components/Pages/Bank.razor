@@ -36,7 +36,17 @@
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
             <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop</button>
+            <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="white-space:nowrap;" @onclick="ToggleSpeechRecognition">
+                @(isListening ? "🎤 Listening..." : "🎤 Speak")
+            </button>
         </div>
+        @if (!string.IsNullOrEmpty(speechError))
+        {
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                @speechError
+                <button type="button" class="btn-close" @onclick="() => speechError = null"></button>
+            </div>
+        }
     </div>
 
     <!-- Two-column region: Conversation (left) + Case Notes (right) -->
@@ -96,6 +106,9 @@
     private string selectedVoice = "onyx";  @* Male banker - professional, deep voice *@
     private float speed = 1.0f;
     private string? ttsError = null;
+    private bool isListening = false;
+    private string? speechError = null;
+    private DotNetObjectReference<Bank>? dotNetHelper;
 
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -103,6 +116,7 @@
         if (firstRender)
         {
             isInteractiveRendered = true;
+            dotNetHelper = DotNetObjectReference.Create(this);
         }
 
         return Task.CompletedTask;
@@ -192,10 +206,93 @@
         }
     }
 
+    private async Task ToggleSpeechRecognition()
+    {
+        if (!isInteractiveRendered)
+        {
+            speechError = "Page not fully loaded yet";
+            return;
+        }
+
+        if (isListening)
+        {
+            await StopListening();
+        }
+        else
+        {
+            await StartListening();
+        }
+    }
+
+    private async Task StartListening()
+    {
+        try
+        {
+            speechError = null;
+            var success = await JS.InvokeAsync<bool>("speechRecognition.startListening", dotNetHelper);
+            if (success)
+            {
+                isListening = true;
+                StateHasChanged();
+            }
+            else
+            {
+                speechError = "Speech recognition not supported in this browser";
+            }
+        }
+        catch (Exception ex)
+        {
+            speechError = $"Speech recognition error: {ex.Message}";
+            Console.WriteLine($"Speech recognition error: {ex}");
+        }
+    }
+
+    private async Task StopListening()
+    {
+        try
+        {
+            await JS.InvokeVoidAsync("speechRecognition.stopListening");
+            isListening = false;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Stop listening error: {ex}");
+        }
+    }
+
+    [JSInvokable]
+    public void OnSpeechRecognized(string transcript)
+    {
+        Console.WriteLine($"Speech recognized: {transcript}");
+        message = transcript;
+        isListening = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnSpeechError(string error)
+    {
+        Console.WriteLine($"Speech error: {error}");
+        speechError = $"Speech recognition error: {error}";
+        isListening = false;
+        InvokeAsync(StateHasChanged);
+    }
+
+    [JSInvokable]
+    public void OnSpeechEnded()
+    {
+        Console.WriteLine("Speech recognition ended");
+        isListening = false;
+        InvokeAsync(StateHasChanged);
+    }
+
     public async void Dispose()
     {
         // Stop audio when navigating away from the page
         await StopSpeech();
+        await StopListening();
+        dotNetHelper?.Dispose();
     }
 
     private async Task ClearMessage()

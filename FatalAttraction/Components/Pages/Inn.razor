@@ -34,11 +34,11 @@
           @onkeydown="HandleKeyDown"
           placeholder="Speak or type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
-            <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
-            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop</button>
             <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="white-space:nowrap;" @onclick="ToggleSpeechRecognition">
                 @(isListening ? "🎤 Listening..." : "🎤 Speak")
             </button>
+            <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
+            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop</button>
         </div>
         @if (!string.IsNullOrEmpty(speechError))
         {

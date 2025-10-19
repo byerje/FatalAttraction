@@ -1,15 +1,17 @@
-using Microsoft.CognitiveServices.Speech;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace FatalAttraction.Services;
 
 public class AzureSpeechService
 {
     private readonly AzureSpeechOptions _options;
+    private readonly HttpClient _httpClient;
 
-    public AzureSpeechService(IOptions<AzureSpeechOptions> options)
+    public AzureSpeechService(IOptions<AzureSpeechOptions> options, IHttpClientFactory httpClientFactory)
     {
         _options = options.Value;
+        _httpClient = httpClientFactory.CreateClient();
     }
 
     public async Task<byte[]> SynthesizeAsync(string text, string? voice = null)
@@ -26,34 +28,30 @@ public class AzureSpeechService
 
         try
         {
-            // Use region directly from configuration
             var region = string.IsNullOrWhiteSpace(_options.Region) ? "westus3" : _options.Region;
+            var voiceName = MapVoiceToAzureVoice(voice);
             
-            // Configure speech SDK
-            var config = SpeechConfig.FromSubscription(_options.ApiKey, region);
-            config.SpeechSynthesisVoiceName = MapVoiceToAzureVoice(voice);
-            config.SetSpeechSynthesisOutputFormat(SpeechSynthesisOutputFormat.Audio16Khz32KBitRateMonoMp3);
-
-            using var synthesizer = new SpeechSynthesizer(config, null);
+            // Build the REST API endpoint
+            var endpoint = $"https://{region}.tts.speech.microsoft.com/cognitiveservices/v1";
             
-            // Build SSML with speed control
-            var ssml = BuildSsml(text, config.SpeechSynthesisVoiceName, speed);
+            // Build SSML
+            var ssml = BuildSsml(text, voiceName, speed);
             
-            var result = await synthesizer.SpeakSsmlAsync(ssml);
-
-            if (result.Reason == ResultReason.SynthesizingAudioCompleted)
+            // Create request
+            var request = new HttpRequestMessage(HttpMethod.Post, endpoint);
+            request.Headers.Add("Ocp-Apim-Subscription-Key", _options.ApiKey);
+            request.Headers.Add("X-Microsoft-OutputFormat", "audio-16khz-32kbitrate-mono-mp3");
+            request.Content = new StringContent(ssml, Encoding.UTF8, "application/ssml+xml");
+            
+            var response = await _httpClient.SendAsync(request);
+            
+            if (!response.IsSuccessStatusCode)
             {
-                return result.AudioData;
+                var error = await response.Content.ReadAsStringAsync();
+                throw new InvalidOperationException($"Speech synthesis failed: {response.StatusCode}. Error: {error}");
             }
-            else if (result.Reason == ResultReason.Canceled)
-            {
-                var cancellation = SpeechSynthesisCancellationDetails.FromResult(result);
-                throw new InvalidOperationException($"Speech synthesis canceled: {cancellation.Reason}. Error: {cancellation.ErrorDetails}");
-            }
-            else
-            {
-                throw new InvalidOperationException($"Speech synthesis failed with reason: {result.Reason}");
-            }
+            
+            return await response.Content.ReadAsByteArrayAsync();
         }
         catch (Exception ex)
         {

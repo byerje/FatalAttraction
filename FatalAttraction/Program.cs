@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Add HttpClient for REST API calls
+builder.Services.AddHttpClient();
+
 // Configure AI services
 var aiConfig = builder.Configuration.GetSection("AI");
 

@@ -48,7 +48,8 @@ public class AzureSpeechService
             if (!response.IsSuccessStatusCode)
             {
                 var error = await response.Content.ReadAsStringAsync();
-                throw new InvalidOperationException($"Speech synthesis failed: {response.StatusCode}. Error: {error}");
+                var requestId = response.Headers.TryGetValues("x-ms-request-id", out var ids) ? ids.FirstOrDefault() : "unknown";
+                throw new InvalidOperationException($"Speech synthesis failed: {response.StatusCode}. Error: {error}. Region: {region}. Request ID: {requestId}");
             }
             
             return await response.Content.ReadAsByteArrayAsync();

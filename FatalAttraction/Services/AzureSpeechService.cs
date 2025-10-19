@@ -26,8 +26,8 @@ public class AzureSpeechService
 
         try
         {
-            // Extract region from endpoint URL
-            var region = ExtractRegionFromEndpoint(_options.Endpoint);
+            // Use region directly from configuration
+            var region = string.IsNullOrWhiteSpace(_options.Region) ? "westus3" : _options.Region;
             
             // Configure speech SDK
             var config = SpeechConfig.FromSubscription(_options.ApiKey, region);
@@ -59,24 +59,6 @@ public class AzureSpeechService
         {
             throw new InvalidOperationException($"Failed to synthesize speech: {ex.Message}", ex);
         }
-    }
-
-    private string ExtractRegionFromEndpoint(string endpoint)
-    {
-        // Extract region from endpoint like: https://byerj-mgwqvsgi-westus3.services.ai.azure.com
-        var uri = new Uri(endpoint);
-        var host = uri.Host; // byerj-mgwqvsgi-westus3.services.ai.azure.com
-        var parts = host.Split('.');
-        if (parts.Length > 0)
-        {
-            var firstPart = parts[0]; // byerj-mgwqvsgi-westus3
-            var regionParts = firstPart.Split('-');
-            if (regionParts.Length > 0)
-            {
-                return regionParts[^1]; // westus3
-            }
-        }
-        return "westus3"; // Default fallback
     }
 
     private string MapVoiceToAzureVoice(string voice)

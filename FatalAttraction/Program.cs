@@ -33,23 +33,24 @@ builder.Services.AddAzureOpenAIChatCompletion("gpt-4", aiEndpoint, aiApiKey);
 builder.Services.AddScoped<FatalAttraction.Services.ChatSessionState>();
 
 // Configure TTS - Using Azure AI Speech Service (not Azure OpenAI)
-var ttsEndpoint = Environment.GetEnvironmentVariable("AZURE_SPEECH_ENDPOINT") 
-    ?? aiConfig["ttsEndpoint"];
+var ttsRegion = Environment.GetEnvironmentVariable("AZURE_SPEECH_REGION") 
+    ?? aiConfig["ttsRegion"] 
+    ?? "westus3"; // Default fallback
 var ttsApiKey = Environment.GetEnvironmentVariable("AZURE_SPEECH_API_KEY") 
     ?? aiConfig["ttsApiKey"];
 
-// If TTS endpoint is not configured, throw error since Azure AI Speech requires it
-if (string.IsNullOrWhiteSpace(ttsEndpoint) || string.IsNullOrWhiteSpace(ttsApiKey))
+// If TTS API key is not configured, throw error
+if (string.IsNullOrWhiteSpace(ttsApiKey))
 {
-    throw new InvalidOperationException("TTS endpoint and API key must be configured. Set 'AZURE_SPEECH_ENDPOINT' and 'AZURE_SPEECH_API_KEY' environment variables.");
+    throw new InvalidOperationException("TTS API key must be configured. Set 'AZURE_SPEECH_API_KEY' environment variable.");
 }
 
 // Configure TTS options for Azure AI Speech Service
 builder.Services.Configure<AzureSpeechOptions>(options =>
 {
-    options.Endpoint = ttsEndpoint!;
+    options.Region = ttsRegion!;
     options.ApiKey = ttsApiKey!;
-    options.Region = string.Empty; // Extracted from endpoint
+    options.Endpoint = string.Empty; // Not used for standard Speech Service
 });
 
 // Register TTS service

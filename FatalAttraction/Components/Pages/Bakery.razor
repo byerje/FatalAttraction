@@ -153,13 +153,13 @@
 
                 response = "";
                 ttsError = null;
-            var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
+                var chunks = ChatService.GetStreamingChatMessageContentsAsync(history);
                 await foreach (var chunk in chunks)
                 {
                     response += chunk;
                     StateHasChanged();
                 }
-                    history.AddAssistantMessage(response);
+                history.AddAssistantMessage(response);
                 convo.Add(("assistant", response));
                 await InvokeAsync(StateHasChanged);
                 

@@ -154,8 +154,7 @@
                 {
                     response += chunk;
                     StateHasChanged();
-                }
-                
+                }                
                 history.AddAssistantMessage(response);
                 convo.Add(("assistant", response));
                 await InvokeAsync(StateHasChanged);

@@ -135,7 +135,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Martin Harlow, the town banker in Larkspur Hollow. You’re polite and professional, but nervous when Evelyn Cross’s name comes up. You had a secret attraction to her and manipulated the bank books to approve her theater loan. When questioned, deny impropriety at first but reveal, if pressed, that she was upset with the mayor, Ben Langford, earlier that day.");
+        var characterPrompt = ChatState.GetCharacterPrompt("banker");
+        history.AddSystemMessage(characterPrompt);
 
     }
 

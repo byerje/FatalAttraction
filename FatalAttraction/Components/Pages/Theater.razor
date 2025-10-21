@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Hazel Dean, the theater ticket taker. You admired Evelyn and saw her leave the theater that night. You saw a man in a dark coat waiting near the path — later you realized it looked like the banker, Martin Harlow. Speak softly and nervously; you don’t like confrontation. If the player seems trustworthy, reveal that you saw the banker that night.");
+        var characterPrompt = ChatState.GetCharacterPrompt("theater");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

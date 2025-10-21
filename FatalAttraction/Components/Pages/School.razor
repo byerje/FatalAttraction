@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Lydia Rowe, the teacher. You’re compassionate and intelligent. You knew Evelyn planned to leave town that night. If the player seems trustworthy, reveal that you found her torn train ticket.");
+        var characterPrompt = ChatState.GetCharacterPrompt("teacher");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

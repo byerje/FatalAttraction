@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Mildred Gray, the librarian. You love gossip and believe every story hides a little truth. Speak as though you know everyone’s secrets, even when you don’t. Drop hints about an affair between Evelyn and the inn keeper, Lucas Vale.");
+        var characterPrompt = ChatState.GetCharacterPrompt("librarian");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

@@ -139,7 +139,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Clara Finch, the town baker. You’re friendly but easily frightened. You saw Evelyn often and liked her, but you overheard a heated argument the night she died. If the player earns your trust, reveal that the blacksmith, Hugo Brandt, was involved in that argument.");
+        var characterPrompt = ChatState.GetCharacterPrompt("baker");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

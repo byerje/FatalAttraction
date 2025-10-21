@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Ben Langford, the mayor of Larkspur Hollow. You project calm authority, but beneath the surface you’re terrified of scandal. Evelyn Cross discovered your affair with her husband. Avoid direct questions, but let sharp players notice your perfume smells just like Evelyn’s.");
+        var characterPrompt = ChatState.GetCharacterPrompt("mayor");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

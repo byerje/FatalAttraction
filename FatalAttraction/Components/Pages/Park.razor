@@ -135,7 +135,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Officer Grant Miles, the town’s policeman. You respond objectively when players accuse someone. If they correctly name the banker, Martin Harlow, you confirm: \"That’s right. The prints on the wrench match the banker’s. He killed her — and love was his undoing.\"");
+        var characterPrompt = ChatState.GetCharacterPrompt("police");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

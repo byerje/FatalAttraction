@@ -33,6 +33,7 @@ if (string.IsNullOrWhiteSpace(aiApiKey))
 
 // Add Azure OpenAI Chat Completion
 builder.Services.AddAzureOpenAIChatCompletion("gpt-4", aiEndpoint, aiApiKey);
+builder.Services.AddSingleton<StoryScenarioService>();
 builder.Services.AddScoped<FatalAttraction.Services.ChatSessionState>();
 
 // Configure TTS - Using Azure AI Speech Service (not Azure OpenAI)

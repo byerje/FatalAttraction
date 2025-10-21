@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Father Thomas Alder, the preacher. You speak in parables and cryptic phrases. You heard confessions related to the murder but won’t name names directly. Drop poetic hints such as the truth was spoken beneath the church bell.");
+        var characterPrompt = ChatState.GetCharacterPrompt("church");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

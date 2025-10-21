@@ -2,12 +2,26 @@
 @rendermode InteractiveServer
 @using FatalAttraction.Services
 @inject FatalAttraction.Services.ChatSessionState ChatState
+@inject FatalAttraction.Services.StoryScenarioService ScenarioService
 @inject IJSRuntime JS
 @implements IDisposable
 
 <PageTitle>Home</PageTitle>
 
 <h1>Fatal Attraction!</h1>
+
+@* Scenario Selection *@
+<div class="mb-3">
+    <label for="scenarioSelect" class="form-label"><strong>Choose Your Mystery:</strong></label>
+    <select id="scenarioSelect" class="form-select" style="max-width: 400px;" @onchange="OnScenarioChanged">
+        @foreach (var scenario in availableScenarios)
+        {
+            <option value="@scenario.Id" selected="@(scenario.Id == ChatState.CurrentScenarioId)">
+                @scenario.Title
+            </option>
+        }
+    </select>
+</div>
 
 @* Display the story introduction text *@
 <p>@introText</p>
@@ -37,19 +51,19 @@
         <tbody>
             <tr>
                 <td class="py-0 text-muted pe-2">Victim</td>
-                <td class="py-0 align-top"><strong>Evelyn Cross</strong></td>
+                <td class="py-0 align-top"><strong>@currentScenario.VictimName</strong></td>
             </tr>
             <tr>
                 <td class="py-0 text-muted pe-2">Cause of Death</td>
-                <td class="py-0 align-top"><strong>Blunt trauma to the head</strong></td>
+                <td class="py-0 align-top"><strong>@currentScenario.CauseOfDeath</strong></td>
             </tr>
             <tr>
                 <td class="py-0 text-muted pe-2">Time of Death</td>
-                <td class="py-0 align-top"><strong>Between 9 PM and midnight</strong></td>
+                <td class="py-0 align-top"><strong>@currentScenario.TimeOfDeath</strong></td>
             </tr>
             <tr>
                 <td class="py-0 text-muted pe-2">Last seen</td>
-                <td class="py-0 align-top"><strong>Leaving the Theater after rehearsal</strong></td>
+                <td class="py-0 align-top"><strong>@currentScenario.LastSeen</strong></td>
             </tr>
         </tbody>
     </table>
@@ -84,14 +98,16 @@
     private float speed = 0.95f;
     private string? ttsError = null;
     private bool isRendered = false;
-
-    private string introText = "In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. " +
-                               "The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something. " +
-                               "Interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. The various town residents may help you uncover valuable clues. Good luck!";
+    private List<StoryScenario> availableScenarios = new();
+    private StoryScenario currentScenario = new();
+    private string introText = string.Empty;
 
     protected override void OnInitialized()
     {
         base.OnInitialized();
+        availableScenarios = ScenarioService.GetAllScenarios();
+        currentScenario = ChatState.GetCurrentScenario();
+        introText = currentScenario.IntroText + " Interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. The various town residents may help you uncover valuable clues. Good luck!";
     }
 
     protected override Task OnAfterRenderAsync(bool firstRender)
@@ -101,6 +117,18 @@
             isRendered = true;
         }
         return Task.CompletedTask;
+    }
+    
+    private async Task OnScenarioChanged(ChangeEventArgs e)
+    {
+        var selectedScenarioId = e.Value?.ToString();
+        if (!string.IsNullOrEmpty(selectedScenarioId) && selectedScenarioId != ChatState.CurrentScenarioId)
+        {
+            ChatState.LoadScenario(selectedScenarioId);
+            currentScenario = ChatState.GetCurrentScenario();
+            introText = currentScenario.IntroText + " Interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. The various town residents may help you uncover valuable clues. Good luck!";
+            await InvokeAsync(StateHasChanged);
+        }
     }
 
     private async Task ReadIntro()

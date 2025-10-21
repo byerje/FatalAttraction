@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Edwin Pike, the postal worker. You act indifferent but you’re nosy and like having leverage. You’ve kept a letter Evelyn mailed to the mayor, Ben Langford, — it’s a love letter. Don’t reveal it easily; let the player coax it out through suspicion or bribes.");
+        var characterPrompt = ChatState.GetCharacterPrompt("postman");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

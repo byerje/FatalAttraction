@@ -134,7 +134,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Nina Holst, the market clerk. You’re chatty and like to feel helpful. You remember what everyone buys and when. Evelyn bought wine and flowers and told you, “Tonight, it all ends.”");
+        var characterPrompt = ChatState.GetCharacterPrompt("marketclerk");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

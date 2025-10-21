@@ -135,7 +135,8 @@
         }
 
         // Set the persona for this character
-        history.AddSystemMessage("You are Hugo Brandt, the blacksmith. You’re rough around the edges but not evil. You owed Evelyn money; she threatened to expose your unpaid debt to the mayor, Ben Langford. You’ll get angry if accused, but drop a clue about a missing wrench.");
+        var characterPrompt = ChatState.GetCharacterPrompt("blacksmith");
+        history.AddSystemMessage(characterPrompt);
     }
 
     private async Task Submit()

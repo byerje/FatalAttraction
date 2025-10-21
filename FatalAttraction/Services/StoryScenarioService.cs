@@ -15,7 +15,7 @@ public class StoryScenarioService
         var bankerScenario = new StoryScenario
         {
             Id = "banker-murder",
-            Title = "The Banker's Fatal Attraction",
+            Title = "Crime of Passion",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Blunt trauma to the head",
             TimeOfDeath = "Between 9 PM and midnight",
@@ -68,7 +68,7 @@ public class StoryScenarioService
         var mayorScenario = new StoryScenario
         {
             Id = "mayor-murder",
-            Title = "The Mayor's Dark Secret",
+            Title = "Web of Corruption",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Poisoning from arsenic",
             TimeOfDeath = "Between 10 PM and 1 AM",

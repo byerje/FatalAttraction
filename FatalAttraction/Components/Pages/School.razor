@@ -34,11 +34,11 @@
           @onkeydown="HandleKeyDown"
           placeholder="Speak or type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
-            <button class="btn @(isListening ? "btn-warning" : "btn-info")" @onclick="ToggleSpeechRecognition">
+            <button class="btn btn-primary" style="min-width:140px;" @onclick="Submit" @ref="askButton">Ask</button>
+            <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="min-width:140px;" @onclick="ToggleSpeechRecognition">
                 @(isListening ? "🎤 Listening..." : "🎤 Speak")
             </button>
-            <button class="btn btn-primary" @onclick="Submit">Ask</button>
-            <button class="btn btn-danger" @onclick="StopSpeech">Stop</button>
+            <button class="btn btn-danger" style="min-width:140px;" @onclick="StopSpeech">Stop</button>
         </div>
         @if (!string.IsNullOrEmpty(speechError))
         {
@@ -96,6 +96,7 @@
     private string response = string.Empty;
     ChatHistory history = new();
     private ElementReference messageInput;
+    private ElementReference askButton;
     private List<(string role, string content)> convo = new();
     private bool isInteractiveRendered;
     private string Notes
@@ -259,12 +260,17 @@
     }
 
     [JSInvokable]
-    public void OnSpeechRecognized(string transcript)
+    public async void OnSpeechRecognized(string transcript)
     {
         Console.WriteLine($"Speech recognized: {transcript}");
         message = transcript;
         isListening = false;
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
+        
+        if (isInteractiveRendered)
+        {
+            await askButton.FocusAsync();
+        }
     }
 
     [JSInvokable]
@@ -277,11 +283,16 @@
     }
 
     [JSInvokable]
-    public void OnSpeechEnded()
+    public async void OnSpeechEnded()
     {
         Console.WriteLine("Speech recognition ended");
         isListening = false;
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
+        
+        if (isInteractiveRendered)
+        {
+            await askButton.FocusAsync();
+        }
     }
 
     public async void Dispose()

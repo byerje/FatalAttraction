@@ -34,11 +34,11 @@
           @onkeydown="HandleKeyDown"
           placeholder="Speak or type your question and click the Ask button..."></textarea>
         <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
-            <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="white-space:nowrap;" @onclick="ToggleSpeechRecognition">
+            <button class="btn btn-primary" style="white-space:nowrap; min-width:140px;" @onclick="Submit" @ref="askButton">Ask</button>
+            <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="white-space:nowrap; min-width:140px;" @onclick="ToggleSpeechRecognition">
                 @(isListening ? "🎤 Listening..." : "🎤 Speak")
             </button>
-            <button class="btn btn-primary" style="white-space:nowrap;" @onclick="Submit">Ask</button>
-            <button class="btn btn-danger" style="white-space:nowrap;" @onclick="StopSpeech">Stop</button>
+            <button class="btn btn-danger" style="white-space:nowrap; min-width:140px;" @onclick="StopSpeech">Stop</button>
         </div>
         @if (!string.IsNullOrEmpty(speechError))
         {
@@ -97,6 +97,7 @@
     ChatHistory history = new();
     private List<(string role, string content)> convo = new();
     private ElementReference messageInput;
+    private ElementReference askButton;
     private bool isInteractiveRendered;
     private string Notes
     {
@@ -261,12 +262,18 @@
     }
 
     [JSInvokable]
-    public void OnSpeechRecognized(string transcript)
+    public async void OnSpeechRecognized(string transcript)
     {
         Console.WriteLine($"Speech recognized: {transcript}");
         message = transcript;
         isListening = false;
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
+        
+        // Focus the Ask button after speech is recognized
+        if (isInteractiveRendered)
+        {
+            await askButton.FocusAsync();
+        }
     }
 
     [JSInvokable]
@@ -279,11 +286,17 @@
     }
 
     [JSInvokable]
-    public void OnSpeechEnded()
+    public async void OnSpeechEnded()
     {
         Console.WriteLine("Speech recognition ended");
         isListening = false;
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
+        
+        // Focus the Ask button when speech recognition ends
+        if (isInteractiveRendered)
+        {
+            await askButton.FocusAsync();
+        }
     }
 
     public async void Dispose()

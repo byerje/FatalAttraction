@@ -13,10 +13,10 @@
 @* Scenario Selection *@
 <div class="mb-3">
     <label for="scenarioSelect" class="form-label"><strong>Choose Your Mystery:</strong></label>
-    <select id="scenarioSelect" class="form-select" style="max-width: 400px;" @onchange="OnScenarioChanged">
+    <select id="scenarioSelect" class="form-select" style="max-width: 400px;" value="@ChatState.CurrentScenarioId" @onchange="OnScenarioChanged">
         @foreach (var scenario in availableScenarios)
         {
-            <option value="@scenario.Id" selected="@(scenario.Id == ChatState.CurrentScenarioId)">
+            <option value="@scenario.Id">
                 @scenario.Title
             </option>
         }

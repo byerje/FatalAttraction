@@ -17,10 +17,10 @@ public class StoryScenarioService
             Id = "banker-murder",
             Title = "Murder Mystery #1",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Blunt trauma to the head from a wrench",
+            CauseOfDeath = "Blunt force trauma to the head",
             TimeOfDeath = "Between 9 PM and midnight",
             LastSeen = "Leaving the Market with groceries",
-            IntroText = "In the quiet town of Larkspur Hollow, the body of Evelyn Cross, a beloved actress, is found dead in the park at dawn, a wrench lying nearby. " +
+            IntroText = "In the quiet town of Larkspur Hollow, the body of Evelyn Cross, a beloved actress, is found dead in the park at dawn. " +
                 "The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something.",
             MurdererCharacterKey = "banker",
             SolutionConfirmation = "That's right. The prints on the wrench match the banker's. He killed her — and love was his undoing."
@@ -28,7 +28,7 @@ public class StoryScenarioService
         
         // Shared prompts for banker scenario
         bankerScenario.SharedPrompts.Add("In the quiet town of Larkspur Hollow, the body of Evelyn Cross, a beloved actress, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. ");
-        bankerScenario.SharedPrompts.Add("Cause of Death: Blunt trauma to the head from a wrench.");
+        bankerScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma to the head.");
         bankerScenario.SharedPrompts.Add("Time of Death: Between 9 PM and midnight. ");
         bankerScenario.SharedPrompts.Add("Last seen: Leaving the Market with groceries. ");
         bankerScenario.SharedPrompts.Add("Theme: Each suspect's \"attraction\" (romantic, financial, power, or admiration) drove their behavior.");
@@ -70,17 +70,17 @@ public class StoryScenarioService
             Id = "mayor-murder",
             Title = "Murder Mystery #2",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Poisoning from arsenic",
+            CauseOfDeath = "Poisoning",
             TimeOfDeath = "Between 10 PM and 1 AM",
             LastSeen = "Posting a letter at the Post Office",
             IntroText = "In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in the church garden. " +
-                "The cause? Arsenic poisoning. Whispers of scandal and secrets fill the town square.",
+                "The cause? Poisoning. Whispers of scandal and secrets fill the town square.",
             MurdererCharacterKey = "mayor",
             SolutionConfirmation = "You've uncovered the truth. The mayor, Ben Langford, poisoned Evelyn to protect his political career. The wine glass found in her room had his fingerprints — and traces of arsenic from his office. Power was his motive, silence was his method."
         };
         
-        mayorScenario.SharedPrompts.Add("In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in the church garden. The cause? Arsenic poisoning. Whispers of scandal and secrets fill the town. Evelyn had discovered something that could ruin powerful people — and someone silenced her. The player must interview each character to uncover the truth.");
-        mayorScenario.SharedPrompts.Add("Cause of Death: Poisoning from arsenic.");
+        mayorScenario.SharedPrompts.Add("In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in the church garden. The cause? Poisoning. Whispers of scandal and secrets fill the town. Evelyn had discovered something that could ruin powerful people — and someone silenced her. The player must interview each character to uncover the truth.");
+        mayorScenario.SharedPrompts.Add("Cause of Death: Poisoning.");
         mayorScenario.SharedPrompts.Add("Time of Death: Between 10 PM and 1 AM. ");
         mayorScenario.SharedPrompts.Add("Last seen: Posting a letter at the Post Office. ");
         mayorScenario.SharedPrompts.Add("Theme: Power corrupts, and secrets kill. Multiple people had motives, but only one had the means and ruthlessness.");
@@ -121,34 +121,34 @@ public class StoryScenarioService
             Id = "blacksmith-murder",
             Title = "Murder Mystery #3",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Strangulation with iron chain",
+            CauseOfDeath = "Strangulation",
             TimeOfDeath = "Between 11 PM and 2 AM",
             LastSeen = "Browsing books at the Library",
-            IntroText = "In the quiet town of Larkspur Hollow, Evelyn Cross's body is discovered in the schoolyard, an iron chain still wrapped around her neck. " +
+            IntroText = "In the quiet town of Larkspur Hollow, Evelyn Cross's body is discovered in the schoolyard. " +
                 "The townsfolk whisper of unpaid debts and heated arguments. Someone's honor was at stake — and it cost Evelyn her life.",
             MurdererCharacterKey = "blacksmith",
             SolutionConfirmation = "You've solved it. The chain matches the blacksmith's forge. Hugo Brandt killed her when she threatened to expose his debts and ruin his reputation. Pride was his downfall."
         };
         
-        blacksmithScenario.SharedPrompts.Add("Evelyn Cross was found strangled with an iron chain in the schoolyard. Hugo Brandt owed her money and she threatened to tell everyone. The player must uncover who had both motive and means to kill her.");
-        blacksmithScenario.SharedPrompts.Add("Cause of Death: Strangulation with iron chain.");
+        blacksmithScenario.SharedPrompts.Add("Evelyn Cross was found strangled in the schoolyard. Someone owed her money and she threatened to expose them. The player must uncover who had both motive and means to kill her.");
+        blacksmithScenario.SharedPrompts.Add("Cause of Death: Strangulation.");
         blacksmithScenario.SharedPrompts.Add("Time of Death: Between 11 PM and 2 AM.");
         blacksmithScenario.SharedPrompts.Add("Last seen: Browsing books at the Library.");
         blacksmithScenario.SharedPrompts.Add("Theme: Pride and debt can be deadly. Someone couldn't bear the shame of exposure.");
-        blacksmithScenario.SharedPrompts.Add("Don't be long-winded in your response. Focus on character motives and what they know about the blacksmith's financial troubles.");
+        blacksmithScenario.SharedPrompts.Add("Don't be long-winded in your response. Focus on character motives and what they know about financial troubles.");
         
-        blacksmithScenario.CharacterPrompts["blacksmith"] = "You are Hugo Brandt, the blacksmith. You killed Evelyn because she was going to expose your massive debts to the whole town, ruining your reputation. You strangled her with a chain from your forge during an argument. Act defensive and angry when questioned. If cornered with evidence, claim it was an accident in the heat of passion.";
-        blacksmithScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch, the baker. You heard shouting from the forge late that night. You're afraid to say it was the blacksmith because he's intimidating, but you know he owed Evelyn a lot of money. Share this if the player earns your trust.";
+        blacksmithScenario.CharacterPrompts["blacksmith"] = "You are Hugo Brandt, the blacksmith. You killed Evelyn because she was going to expose your massive debts to the whole town, ruining your reputation. You strangled her during an argument. Act defensive and angry when questioned. If cornered with evidence, claim it was an accident in the heat of passion.";
+        blacksmithScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch, the baker. You heard shouting late that night. You're afraid to say who because he's intimidating, but you know he owed Evelyn a lot of money. Share this if the player earns your trust.";
         blacksmithScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow, the banker. The blacksmith took out loans he couldn't repay. Evelyn co-signed one and was demanding payment. You'll reveal this information if asked directly.";
-        blacksmithScenario.CharacterPrompts["church"] = "You are Father Thomas Alder, the preacher. You speak in riddles. The blacksmith confessed fears about losing everything to debt. Hint that 'the strongest metal can forge the darkest chains.'";
-        blacksmithScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale, the innkeeper. Evelyn told you she was going to confront the blacksmith about money he owed. You warned her it was dangerous. Share this if pressed.";
-        blacksmithScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray, the librarian. You love gossip. You know the blacksmith owed money all over town and Evelyn was one of his biggest creditors. You hint heavily at his financial troubles.";
-        blacksmithScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst, the market clerk. You saw Evelyn buying a ledger book, saying she was going to 'settle accounts once and for all.' You suspect she meant the blacksmith.";
-        blacksmithScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. You found an iron chain with Evelyn's blood and the blacksmith's fingerprints. If the player accuses Hugo Brandt, confirm: 'Correct. The chain from his forge, his prints, his motive. Hugo Brandt killed her to silence the debt.'";
-        blacksmithScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike, the postal worker. You delivered collection notices to the blacksmith. He looked desperate. You'll share this if it benefits you.";
-        blacksmithScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe, the teacher. You saw Evelyn with documents about the blacksmith's unpaid debts. She seemed determined to collect. Share if the player seems trustworthy.";
-        blacksmithScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean, the theater worker. You're nervous and shy. You heard the blacksmith threaten Evelyn at the theater, saying 'you'll regret pushing me.' Share this carefully.";
-        blacksmithScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford, the mayor. You know the blacksmith was in dire financial straits. Evelyn asked you about legal options for collecting debts. You'll share this to deflect from yourself.";
+        blacksmithScenario.CharacterPrompts["church"] = "You are Father Thomas Alder, the preacher. You speak in riddles. Someone confessed fears about losing everything to debt. Hint that 'the strongest metal can bind the darkest secrets.'";
+        blacksmithScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale, the innkeeper. Evelyn told you she was going to confront someone about money they owed. You warned her it was dangerous. Share this if pressed.";
+        blacksmithScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray, the librarian. You love gossip. You know someone owed money all over town and Evelyn was one of their biggest creditors. You hint heavily at financial troubles.";
+        blacksmithScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst, the market clerk. You saw Evelyn buying a ledger book, saying she was going to 'settle accounts once and for all.' You're not sure who she meant.";
+        blacksmithScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. You found evidence with the killer's fingerprints. If the player accuses Hugo Brandt, confirm: 'Correct. The evidence points to him, his prints, his motive. Hugo Brandt killed her to silence the debt.'";
+        blacksmithScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike, the postal worker. You delivered collection notices to several people in town. One looked especially desperate. You'll share this if it benefits you.";
+        blacksmithScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe, the teacher. You saw Evelyn with documents about someone's unpaid debts. She seemed determined to collect. Share if the player seems trustworthy.";
+        blacksmithScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean, the theater worker. You're nervous and shy. You heard someone threaten Evelyn at the theater, saying 'you'll regret pushing me.' Share this carefully.";
+        blacksmithScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford, the mayor. You know someone in town was in dire financial straits. Evelyn asked you about legal options for collecting debts. You'll share this to deflect from yourself.";
         
         _scenarios[blacksmithScenario.Id] = blacksmithScenario;
         
@@ -158,17 +158,17 @@ public class StoryScenarioService
             Id = "innkeeper-murder",
             Title = "Murder Mystery #4",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Fatal fall from third-floor balcony",
+            CauseOfDeath = "Fatal fall from height",
             TimeOfDeath = "Between midnight and 2 AM",
             LastSeen = "Attending late rehearsal at the Theater",
-            IntroText = "Evelyn Cross's broken body lies in the courtyard below the Inn's third-floor balcony. Whispers of jealousy and betrayal fill the air. " +
-                "Evelyn was tangled in affairs, financial concerns, and secrets.",
+            IntroText = "Evelyn Cross's broken body lies in a courtyard. Some say it was suicide. Whispers of jealousy and betrayal fill the air. " +
+                "Evelyn was tangled in affairs, financial concerns, scandals, and secrets.",
             MurdererCharacterKey = "innkeeper",
             SolutionConfirmation = "You've uncovered the truth. Lucas Vale pushed Evelyn from the balcony when she tried to end their affair and threatened to tell his wife. Jealousy and fear destroyed them both."
         };
         
-        innkeeperScenario.SharedPrompts.Add("Evelyn Cross died falling from the Inn balcony. Lucas Vale claims she jumped, but she had no reason to. Someone pushed her. The player must find out who had motive and opportunity.");
-        innkeeperScenario.SharedPrompts.Add("Cause of Death: Fatal fall from third-floor balcony.");
+        innkeeperScenario.SharedPrompts.Add("Evelyn Cross died from a fatal fall. Someone claims she jumped, but she had no reason to. Someone pushed her. The player must find out who had motive and opportunity.");
+        innkeeperScenario.SharedPrompts.Add("Cause of Death: Fatal fall from height.");
         innkeeperScenario.SharedPrompts.Add("Time of Death: Between midnight and 2 AM.");
         innkeeperScenario.SharedPrompts.Add("Last seen: Attending late rehearsal at the Theater.");
         innkeeperScenario.SharedPrompts.Add("Theme: Jealousy and obsession can turn love into murder.");
@@ -195,34 +195,34 @@ public class StoryScenarioService
             Id = "baker-murder",
             Title = "Murder Mystery #5",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Poisoned pastry containing cyanide",
+            CauseOfDeath = "Poisoning",
             TimeOfDeath = "Between 8 AM and 10 AM",
             LastSeen = "Walking through the Park",
-            IntroText = "Evelyn Cross collapses near the fountain after eating a pastry, foam at her lips. Cyanide poisoning. " +
-                "Someone was willing to kill Evelyn for what she knew or what she threatened to reveal.",
+            IntroText = "Evelyn Cross collapses near the fountain, foam at her lips. Poisoning. " +
+                "Someone was willing to kill Evelyn for what she knew, what she did, or what she threatened to reveal.",
             MurdererCharacterKey = "baker",
             SolutionConfirmation = "You've discovered the truth. Clara Finch poisoned the pastry. Evelyn discovered Clara had been embezzling from the church charity fund, and threatened to expose her. Fear drove her to murder."
         };
         
-        bakerScenario.SharedPrompts.Add("Evelyn Cross died from cyanide poisoning in a pastry. Clara Finch had access and opportunity. Find out who had a motive.");
-        bakerScenario.SharedPrompts.Add("Cause of Death: Cyanide poisoning.");
+        bakerScenario.SharedPrompts.Add("Evelyn Cross died from poisoning. Someone had access and opportunity. Find out who had a motive.");
+        bakerScenario.SharedPrompts.Add("Cause of Death: Poisoning.");
         bakerScenario.SharedPrompts.Add("Time of Death: Between 8 AM and 10 AM.");
         bakerScenario.SharedPrompts.Add("Last seen: Walking through the Park.");
         bakerScenario.SharedPrompts.Add("Theme: Even the kindest people can kill when desperate to protect a secret.");
-        bakerScenario.SharedPrompts.Add("Focus on the baker's financial troubles and what Evelyn knew.");
+        bakerScenario.SharedPrompts.Add("Focus on financial troubles and what Evelyn knew.");
         
-        bakerScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch, the baker. You killed Evelyn with a poisoned pastry because she discovered you'd been stealing from the church charity fund to save your failing bakery. You're sweet and nervous, acting shocked. If confronted with evidence, break down and confess you panicked.";
-        bakerScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. The bakery is in financial trouble. Clara's been making strange cash deposits. You suspect embezzlement somewhere. Share if asked about her finances.";
-        bakerScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. You saw the baker give Evelyn a special pastry that morning. She insisted Evelyn take that specific one. Seemed odd. Share this.";
-        bakerScenario.CharacterPrompts["church"] = "You are Father Thomas Alder. Church charity money has gone missing. Evelyn was helping you audit the books. Speak cryptically: 'The sweetest bread can hide the bitterest poison.'";
-        bakerScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn told you she found financial discrepancies involving the baker and church funds. She was going to report it. Share this information.";
-        bakerScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You gossip about the baker's money troubles. Her bakery is failing despite church charity donations. Very suspicious.";
-        bakerScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst. The baker buys ingredients on credit. She's desperate. Evelyn mentioned finding irregularities in church accounts. Share if asked.";
-        bakerScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. Cyanide was found in the pastry, and the baker had rat poison (contains cyanide) in her storage. If accused: 'Correct. Clara Finch poisoned her to hide embezzlement from the church fund.'";
-        bakerScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You delivered overdue bills to the bakery constantly. The baker looked desperate. You'll share this.";
-        bakerScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn showed you church financial records with discrepancies. The baker had access to those funds. Share if the player seems competent.";
+        bakerScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch, the baker. You killed Evelyn with poison because she discovered you'd been stealing from the church charity fund to save your failing bakery. You're sweet and nervous, acting shocked. If confronted with evidence, break down and confess you panicked.";
+        bakerScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. The bakery is in financial trouble. Someone's been making strange cash deposits. You suspect embezzlement somewhere. Share if asked about finances.";
+        bakerScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. You saw someone give Evelyn something to eat that morning. They insisted she take that specific item. Seemed odd. Share this.";
+        bakerScenario.CharacterPrompts["church"] = "You are Father Thomas Alder. Church charity money has gone missing. Evelyn was helping you audit the books. Speak cryptically: 'The sweetest offerings can hide the bitterest poison.'";
+        bakerScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn told you she found financial discrepancies involving church funds. She was going to report it. Share this information.";
+        bakerScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You gossip about money troubles in town. Someone's bakery is failing despite charity donations. Very suspicious.";
+        bakerScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst. Someone buys ingredients on credit constantly. They're desperate. Evelyn mentioned finding irregularities in church accounts. Share if asked.";
+        bakerScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. Poison was found, and someone in town had access to the poison source. If accused: 'Correct. Clara Finch poisoned her to hide embezzlement from the church fund.'";
+        bakerScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You delivered overdue bills to various businesses constantly. One owner looked especially desperate. You'll share this.";
+        bakerScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn showed you church financial records with discrepancies. Someone had access to those funds. Share if the player seems competent.";
         bakerScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. You overheard Evelyn telling someone she found proof of theft from the church. You didn't hear who. Share nervously.";
-        bakerScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. The church reported missing charity funds. Evelyn was investigating. The baker handled church bake sale donations. Connect the dots if asked.";
+        bakerScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. The church reported missing charity funds. Evelyn was investigating. Someone handled church donations. Connect the dots if asked.";
         
         _scenarios[bakerScenario.Id] = bakerScenario;
         
@@ -232,17 +232,17 @@ public class StoryScenarioService
             Id = "librarian-murder",
             Title = "Murder Mystery #6",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Struck with heavy bronze bookend",
+            CauseOfDeath = "Blunt force trauma to the head",
             TimeOfDeath = "Between 7 PM and 9 PM",
             LastSeen = "Having tea at the Bakery",
-            IntroText = "Evelyn Cross lies dead in an alley behind the Town Hall, a bronze bookend beside her bloodied head. The elderly librarian Mildred Gray, who knows everyone's secrets, " +
-                "had one secret too dangerous to let escape.",
+            IntroText = "Evelyn Cross lies dead in an alley behind the Town Hall. " +
+                "Someone had one secret too dangerous to let escape.",
             MurdererCharacterKey = "librarian",
             SolutionConfirmation = "You've solved it. Mildred Gray killed Evelyn with the bookend. Evelyn discovered that Mildred had been selling rare books from the library's collection to pay gambling debts. Knowledge is power — and deadly when exposed."
         };
         
-        librarianScenario.SharedPrompts.Add("Evelyn Cross was killed with a bookend. The librarian knows everyone's secrets — but someone discovered hers. Find out what Evelyn knew that got her killed.");
-        librarianScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma from bronze bookend.");
+        librarianScenario.SharedPrompts.Add("Evelyn Cross was killed with blunt force. Someone knows everyone's secrets — but someone discovered theirs. Find out what Evelyn knew that got her killed.");
+        librarianScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma to the head.");
         librarianScenario.SharedPrompts.Add("Time of Death: Between 7 PM and 9 PM.");
         librarianScenario.SharedPrompts.Add("Last seen: Having tea at the Bakery.");
         librarianScenario.SharedPrompts.Add("Theme: Those who keep secrets for a living have the most to hide.");
@@ -269,34 +269,34 @@ public class StoryScenarioService
             Id = "postman-murder",
             Title = "Murder Mystery #7",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Stabbed with letter opener",
+            CauseOfDeath = "Stabbed",
             TimeOfDeath = "Between 6 PM and 8 PM",
             LastSeen = "Meeting someone at the Church",
-            IntroText = "Evelyn Cross's body is found in the park near the fountain, a bloody letter opener beside her. The cynical postal worker Edwin Pike had access to everyone's secrets through their mail. " +
-                "This time, someone's secrets proved deadly.",
+            IntroText = "Evelyn Cross's body is found in the park near the fountain. " +
+                "Someone's secrets proved deadly.",
             MurdererCharacterKey = "postman",
             SolutionConfirmation = "You've got him. Edwin Pike killed Evelyn when she threatened to report him for blackmail and mail tampering. He'd been extorting people for years using their private letters. She was going to end it."
         };
         
-        postmanScenario.SharedPrompts.Add("Evelyn Cross was stabbed with a letter opener. Edwin Pike has access to everyone's mail and secrets. Someone was being blackmailed and decided to fight back — or was the blackmailer himself the killer?");
-        postmanScenario.SharedPrompts.Add("Cause of Death: Stabbed with letter opener.");
+        postmanScenario.SharedPrompts.Add("Evelyn Cross was stabbed. Someone has access to everyone's mail and secrets. Someone was being blackmailed and decided to fight back — or was the blackmailer himself the killer?");
+        postmanScenario.SharedPrompts.Add("Cause of Death: Stabbed.");
         postmanScenario.SharedPrompts.Add("Time of Death: Between 6 PM and 8 PM.");
         postmanScenario.SharedPrompts.Add("Last seen: Meeting someone at the Church.");
         postmanScenario.SharedPrompts.Add("Theme: Knowledge of secrets can be profitable — and fatal.");
         postmanScenario.SharedPrompts.Add("Focus on mail tampering, blackmail, and who was being extorted.");
         
-        postmanScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike, the postal worker. You killed Evelyn when she discovered you'd been blackmailing townspeople using information from their mail. She was going to federal authorities. You stabbed her with a letter opener. Act cynical and helpful, suggesting others. If cornered, claim self-defense.";
-        postmanScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. The postal worker has been hinting he knows things about you, asking for money. You're terrified. Share this if you trust the player.";
-        postmanScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. Several clients complained their private financial mail seemed to have been opened. You suspect the postal worker. Share this suspicion.";
-        postmanScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. The postal worker tried to blackmail you over personal letters. You refused to pay. Share this angrily.";
+        postmanScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike, the postal worker. You killed Evelyn when she discovered you'd been blackmailing townspeople using information from their mail. She was going to federal authorities. You stabbed her. Act cynical and helpful, suggesting others. If cornered, claim self-defense.";
+        postmanScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. Someone has been hinting they know things about you, asking for money. You're terrified. Share this if you trust the player.";
+        postmanScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. Several clients complained their private financial mail seemed to have been opened. You have suspicions. Share this.";
+        postmanScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. Someone tried to blackmail you over personal letters. You refused to pay. Share this angrily.";
         postmanScenario.CharacterPrompts["church"] = "You are Father Thomas Alder. Speak cryptically: 'He who opens sealed messages will find his own secrets exposed in blood.'";
-        postmanScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. The postal worker knows about affairs and indiscretions. He's been collecting money from people. It's an open secret. Share this.";
-        postmanScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. Even you don't know as much as the postal worker. He's been blackmailing half the town. Evelyn was investigating. Share your gossip.";
+        postmanScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Someone knows about affairs and indiscretions. They've been collecting money from people. It's an open secret. Share this.";
+        postmanScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. Someone's been blackmailing half the town. Evelyn was investigating. Share your gossip.";
         postmanScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst. Evelyn told you she was gathering evidence of mail tampering and extortion. She planned to report someone. Share if asked.";
-        postmanScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. Evidence shows the postal worker's fingerprints on the murder weapon, and you found blackmail payments in his desk. If accused: 'Right. Edwin Pike killed her to protect his blackmail scheme.'";
-        postmanScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn showed you proof of mail tampering. She was building a case against the postal worker. Share if you trust the investigator.";
-        postmanScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. The postal worker hinted he knew embarrassing things about you from letters. You paid him to keep quiet. Share this shamefully.";
-        postmanScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Citizens have reported suspicious mail handling. Evelyn was helping you investigate postal worker misconduct. Share this to help.";
+        postmanScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. Evidence shows fingerprints on the murder weapon, and you found blackmail payments in a desk. If accused: 'Right. Edwin Pike killed her to protect his blackmail scheme.'";
+        postmanScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn showed you proof of mail tampering. She was building a case. Share if you trust the investigator.";
+        postmanScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. Someone hinted they knew embarrassing things about you from letters. You paid them to keep quiet. Share this shamefully.";
+        postmanScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Citizens have reported suspicious mail handling. Evelyn was helping you investigate misconduct. Share this to help.";
         
         _scenarios[postmanScenario.Id] = postmanScenario;
         
@@ -306,16 +306,16 @@ public class StoryScenarioService
             Id = "teacher-murder",
             Title = "Murder Mystery #8",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Drowned in water",
+            CauseOfDeath = "Drowned",
             TimeOfDeath = "Between 5 PM and 7 PM",
             LastSeen = "Shopping at the Market",
-            IntroText = "Evelyn Cross's body is found in the school's courtyard fountain. The compassionate teacher Lydia Rowe discovered her, but teachers protect fiercely — " +
-                "even if it means crossing moral lines.",
+            IntroText = "Evelyn Cross's body is found in a fountain. " +
+                "Someone protects fiercely — even if it means crossing moral lines.",
             MurdererCharacterKey = "teacher",
             SolutionConfirmation = "You've uncovered the truth. Lydia Rowe drowned Evelyn in the fountain. Evelyn discovered that Lydia had been covering up abuse by her brother, the former principal. To protect her family's name, she silenced Evelyn forever."
         };
         
-        teacherScenario.SharedPrompts.Add("Evelyn Cross was drowned in the school fountain. The teacher seems caring and innocent, but she guards a family secret. Find out what Evelyn discovered that was worth killing for.");
+        teacherScenario.SharedPrompts.Add("Evelyn Cross was drowned. Someone seems caring and innocent, but they guard a family secret. Find out what Evelyn discovered that was worth killing for.");
         teacherScenario.SharedPrompts.Add("Cause of Death: Drowning.");
         teacherScenario.SharedPrompts.Add("Time of Death: Between 5 PM and 7 PM.");
         teacherScenario.SharedPrompts.Add("Last seen: Shopping at the Market.");
@@ -343,17 +343,17 @@ public class StoryScenarioService
             Id = "theater-murder",
             Title = "Murder Mystery #9",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Fatal fall from theater catwalk",
+            CauseOfDeath = "Fatal fall from height",
             TimeOfDeath = "Between 10 PM and midnight",
             LastSeen = "Dining at the Inn",
-            IntroText = "Evelyn Cross lies broken on the theater stage, having fallen from the catwalk high above. Admiration can twist into obsession. " +
+            IntroText = "Evelyn Cross lies broken below. Admiration can twist into obsession. " +
                 "When love is rejected, tragedy follows.",
             MurdererCharacterKey = "theater",
             SolutionConfirmation = "You've solved it. Hazel Dean pushed Evelyn from the catwalk. Her admiration turned to obsession, and when Evelyn rejected her advances and planned to leave theater forever, Hazel snapped. If she couldn't have Evelyn, no one could."
         };
         
-        theaterScenario.SharedPrompts.Add("Evelyn Cross fell from the theater catwalk to her death. Was it an accident, or did someone push her? The shy theater worker seems harmless, but obsession can be deadly.");
-        theaterScenario.SharedPrompts.Add("Cause of Death: Fatal fall from catwalk.");
+        theaterScenario.SharedPrompts.Add("Evelyn Cross fell from a great height to her death. Was it an accident, or did someone push her? Someone seems harmless, but obsession can be deadly.");
+        theaterScenario.SharedPrompts.Add("Cause of Death: Fatal fall from height.");
         theaterScenario.SharedPrompts.Add("Time of Death: Between 10 PM and midnight.");
         theaterScenario.SharedPrompts.Add("Last seen: Dining at the Inn.");
         theaterScenario.SharedPrompts.Add("Theme: Admiration can become obsession, and rejection can turn love into murder.");
@@ -380,34 +380,34 @@ public class StoryScenarioService
             Id = "preacher-murder",
             Title = "Murder Mystery #10",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Strangled with rosary beads",
+            CauseOfDeath = "Strangulation",
             TimeOfDeath = "Between 9 PM and 11 PM",
             LastSeen = "Visiting the Town Hall",
-            IntroText = "Evelyn Cross's body is found behind the blacksmith's forge, strangled with rosary beads. The gentle Father Thomas Alder speaks only in parables, but righteous men can commit unrighteous acts. " +
-                "When faith is tested and hypocrisy exposed, even a man of God can fall.",
+            IntroText = "Evelyn Cross's body is found behind the blacksmith's forge. Righteous people can commit unrighteous acts. " +
+                "When faith is tested and hypocrisy exposed, anyone can fall.",
             MurdererCharacterKey = "church",
             SolutionConfirmation = "You've discovered the truth. Father Thomas Alder strangled Evelyn with rosary beads when she threatened to expose his embezzlement of church funds and his secret family. His piety was a mask for sin."
         };
         
-        preacherScenario.SharedPrompts.Add("Evelyn Cross was strangled with rosary beads. The preacher seems godly and gentle, but she discovered his sins. Find out what secret was worth killing to protect.");
-        preacherScenario.SharedPrompts.Add("Cause of Death: Strangulation with rosary beads.");
+        preacherScenario.SharedPrompts.Add("Evelyn Cross was strangled. Someone seems godly and gentle, but she discovered their sins. Find out what secret was worth killing to protect.");
+        preacherScenario.SharedPrompts.Add("Cause of Death: Strangulation.");
         preacherScenario.SharedPrompts.Add("Time of Death: Between 9 PM and 11 PM.");
         preacherScenario.SharedPrompts.Add("Last seen: Visiting the Town Hall.");
         preacherScenario.SharedPrompts.Add("Theme: The most righteous appearance can hide the darkest sins.");
-        preacherScenario.SharedPrompts.Add("Focus on church finances and the preacher's past.");
+        preacherScenario.SharedPrompts.Add("Focus on church finances and someone's past.");
         
-        preacherScenario.CharacterPrompts["church"] = "You are Father Thomas Alder, the preacher. You killed Evelyn when she discovered you've been embezzling church funds and have a secret family in another town. You strangled her with rosary beads in the confessional. Speak in cryptic parables, appearing holy. If cornered with evidence, claim you were cleansing sin.";
-        preacherScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. You saw the preacher with a woman and children in the next town. He pretended not to know you. Very suspicious. Share if asked.";
-        preacherScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. Church finances show irregularities. Money disappears regularly, and the preacher controls the accounts. Share if investigating church matters.";
-        preacherScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. The preacher lives too well for his modest salary. Expensive clothes, frequent trips. Something's off. Share your suspicions.";
-        preacherScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn was auditing church books for irregularities. She found something troubling about the preacher. Share this information.";
-        preacherScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You love gossip. The preacher makes suspicious trips to another town. People whisper he has another life there. Share your theories enthusiastically.";
-        preacherScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst. Evelyn bought a train ticket to follow the preacher on one of his trips. She said she was investigating something. Share if relevant.";
-        preacherScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. The rosary beads belong to the preacher, and you found evidence of embezzlement plus a second family. If accused: 'Right. Father Alder killed her to hide his double life and theft. His faith was false.'";
-        preacherScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You delivered money orders from the preacher to a woman in another town, not the church. Regular payments. You'll share for compensation.";
-        preacherScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn discovered discrepancies in church finances and evidence the preacher wasn't who he claimed. She was gathering proof. Share if trustworthy.";
-        preacherScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. You saw Evelyn and the preacher arguing at the church. He looked angry, not peaceful. Very unlike him. Share nervously.";
-        preacherScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Church board complaints about missing funds reached your office. Evelyn was helping investigate. The preacher had exclusive access. Share to help.";
+        preacherScenario.CharacterPrompts["church"] = "You are Father Thomas Alder, the preacher. You killed Evelyn when she discovered you've been embezzling church funds and have a secret family in another town. You strangled her. Speak in cryptic parables, appearing holy. If cornered with evidence, claim you were cleansing sin.";
+        preacherScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. You saw someone with a woman and children in the next town. They pretended not to know you. Very suspicious. Share if asked.";
+        preacherScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. Church finances show irregularities. Money disappears regularly. Share if investigating church matters.";
+        preacherScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. Someone lives too well for their modest salary. Expensive clothes, frequent trips. Something's off. Share your suspicions.";
+        preacherScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn was auditing church books for irregularities. She found something troubling. Share this information.";
+        preacherScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You love gossip. Someone makes suspicious trips to another town. People whisper they have another life there. Share your theories enthusiastically.";
+        preacherScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst. Evelyn bought a train ticket to follow someone on their trips. She said she was investigating something. Share if relevant.";
+        preacherScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. Evidence points to someone in the church, and you found evidence of embezzlement plus a second family. If accused: 'Right. Father Alder killed her to hide his double life and theft. His faith was false.'";
+        preacherScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You delivered money orders to a woman in another town, not to church accounts. Regular payments. You'll share for compensation.";
+        preacherScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn discovered discrepancies in church finances and evidence someone wasn't who they claimed. She was gathering proof. Share if trustworthy.";
+        preacherScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. You saw Evelyn and someone arguing at the church. They looked angry, not peaceful. Very unusual. Share nervously.";
+        preacherScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Church board complaints about missing funds reached your office. Evelyn was helping investigate. Someone had exclusive access. Share to help.";
         
         _scenarios[preacherScenario.Id] = preacherScenario;
         
@@ -417,34 +417,34 @@ public class StoryScenarioService
             Id = "market-murder",
             Title = "Murder Mystery #11",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Struck by falling crates",
+            CauseOfDeath = "Blunt force trauma",
             TimeOfDeath = "Between 4 PM and 6 PM",
             LastSeen = "Leaving the Post Office",
-            IntroText = "Evelyn Cross lies crushed beneath heavy crates near the market storage room. The chatty clerk Nina Holst claims it was an accident, but witnesses heard arguing. " +
+            IntroText = "Evelyn Cross lies crushed beneath heavy crates. Someone claims it was an accident, but witnesses heard arguing. " +
                 "Sometimes accidents are carefully arranged.",
             MurdererCharacterKey = "marketclerk",
             SolutionConfirmation = "You've solved it. Nina Holst pushed the crates onto Evelyn deliberately. Evelyn discovered Nina had been overcharging customers and pocketing the difference for years. To protect her theft scheme, she staged a deadly accident."
         };
         
-        marketScenario.SharedPrompts.Add("Evelyn Cross was killed by falling crates near the market. The clerk says it was an accident, but Evelyn was investigating theft. Find out if someone made this accident happen.");
-        marketScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma from falling crates.");
+        marketScenario.SharedPrompts.Add("Evelyn Cross was killed by falling crates. Someone says it was an accident, but Evelyn was investigating theft. Find out if someone made this accident happen.");
+        marketScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma.");
         marketScenario.SharedPrompts.Add("Time of Death: Between 4 PM and 6 PM.");
         marketScenario.SharedPrompts.Add("Last seen: Leaving the Post Office.");
         marketScenario.SharedPrompts.Add("Theme: Small thefts can lead to big crimes when discovery threatens.");
         marketScenario.SharedPrompts.Add("Focus on market finances and customer complaints.");
         
         marketScenario.CharacterPrompts["marketclerk"] = "You are Mrs. Nina Holst, the market clerk. You pushed heavy crates onto Evelyn when she discovered your price-gouging scheme. You've been overcharging and stealing for years. Act chatty and helpful, expressing shock at the accident. If confronted, claim she startled you and they fell accidentally.";
-        marketScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. You noticed the market prices don't match receipts. The clerk might be stealing. Evelyn was comparing prices and receipts. Share this.";
-        marketScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. The market clerk deposits more cash than the market's reported profits suggest. Very suspicious. Share if investigating finances.";
-        marketScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. You heard the market clerk and Evelyn arguing in the storage room moments before the crates fell. Didn't sound like an accident. Share what you heard.";
+        marketScenario.CharacterPrompts["baker"] = "You are Mrs. Clara Finch. You noticed some prices don't match receipts somewhere in town. Evelyn was comparing prices and receipts. Share this.";
+        marketScenario.CharacterPrompts["banker"] = "You are Mr. Martin Harlow. Someone deposits more cash than their reported profits suggest. Very suspicious. Share if investigating finances.";
+        marketScenario.CharacterPrompts["blacksmith"] = "You are Mr. Hugo Brandt. You heard arguing in a storage room moments before the crates fell. Didn't sound like an accident. Share what you heard.";
         marketScenario.CharacterPrompts["church"] = "You are Father Thomas Alder. Speak cryptically: 'She who counts coins twice will count them in blood the third time.'";
-        marketScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn showed you evidence of systematic overcharging at the market. She was going to report the clerk. Share this information.";
-        marketScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You gossip that several customers complained about market prices being higher than marked. The clerk always had excuses. Share enthusiastically.";
-        marketScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. The crates were stacked safely that morning, and rope holding them was cut partway through. The clerk's knife was found nearby. If accused: 'Correct. Nina Holst staged the accident to silence Evelyn's investigation into her theft.'";
-        marketScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You saw the market clerk's ledgers don't match her bank deposits. She's been skimming. You'll share this.";
-        marketScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn was collecting evidence of systematic fraud at the market. She had receipts and witness statements. Share if you trust the investigator.";
-        marketScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. Evelyn told you the market clerk had been cheating customers for years. She was building a case. Share nervously.";
-        marketScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Multiple citizens filed complaints about market overcharges. Evelyn was investigating for consumer protection. The clerk is the prime suspect. Share to help.";
+        marketScenario.CharacterPrompts["innkeeper"] = "You are Mr. Lucas Vale. Evelyn showed you evidence of systematic overcharging somewhere. She was going to report it. Share this information.";
+        marketScenario.CharacterPrompts["librarian"] = "You are Ms. Mildred Gray. You gossip that several customers complained about prices being higher than marked. Someone always had excuses. Share enthusiastically.";
+        marketScenario.CharacterPrompts["police"] = "You are Officer Grant Miles. The crates were stacked safely that morning, and rope holding them was cut partway through. A knife was found nearby. If accused: 'Correct. Nina Holst staged the accident to silence Evelyn's investigation into her theft.'";
+        marketScenario.CharacterPrompts["postman"] = "You are Mr. Edwin Pike. You saw ledgers somewhere that don't match bank deposits. Someone's been skimming. You'll share this.";
+        marketScenario.CharacterPrompts["teacher"] = "You are Ms. Lydia Rowe. Evelyn was collecting evidence of systematic fraud. She had receipts and witness statements. Share if you trust the investigator.";
+        marketScenario.CharacterPrompts["theater"] = "You are Miss Hazel Dean. Evelyn told you someone had been cheating customers for years. She was building a case. Share nervously.";
+        marketScenario.CharacterPrompts["mayor"] = "You are Mr. Ben Langford. Multiple citizens filed complaints about overcharges. Evelyn was investigating for consumer protection. Share to help.";
         
         _scenarios[marketScenario.Id] = marketScenario;
         
@@ -454,17 +454,17 @@ public class StoryScenarioService
             Id = "police-murder",
             Title = "Murder Mystery #12",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Shot with service weapon",
+            CauseOfDeath = "Gunshot",
             TimeOfDeath = "Between 1 AM and 3 AM",
             LastSeen = "Attending church service",
-            IntroText = "Evelyn Cross is found shot dead in an alley near the bank, killed with a police-issue weapon. Officer Grant Miles claims he was on patrol and found her. " +
+            IntroText = "Evelyn Cross is found shot dead in an alley near the bank. " +
                 "When the law itself breaks, who can bring justice?",
             MurdererCharacterKey = "police",
             SolutionConfirmation = "You've uncovered the truth. Officer Grant Miles shot Evelyn with his service weapon. She discovered he'd been taking bribes and covering up crimes for the mayor. He killed her to protect his corrupt partnership and reputation."
         };
         
-        policeScenario.SharedPrompts.Add("Evelyn Cross was shot with a police weapon. The officer investigating claims he found her, but she was exposing police corruption. Find out if the enforcer of justice became the criminal.");
-        policeScenario.SharedPrompts.Add("Cause of Death: Gunshot from police service weapon.");
+        policeScenario.SharedPrompts.Add("Evelyn Cross was shot. An officer claims they found her, but she was exposing corruption. Find out if the enforcer of justice became the criminal.");
+        policeScenario.SharedPrompts.Add("Cause of Death: Gunshot.");
         policeScenario.SharedPrompts.Add("Time of Death: Between 1 AM and 3 AM.");
         policeScenario.SharedPrompts.Add("Last seen: Attending church service.");
         policeScenario.SharedPrompts.Add("Theme: Those who enforce the law can be the most dangerous when they break it.");

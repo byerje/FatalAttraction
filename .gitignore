@@ -28,6 +28,10 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
+# Publish directories
+[Pp]ublish/
+**/[Pp]ublish/
+
 # .NET Core
 project.lock.json
 project.fragment.lock.json

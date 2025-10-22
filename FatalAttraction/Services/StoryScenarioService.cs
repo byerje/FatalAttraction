@@ -15,22 +15,22 @@ public class StoryScenarioService
         var bankerScenario = new StoryScenario
         {
             Id = "banker-murder",
-            Title = "Crime of Passion",
+            Title = "Murder Mystery #1",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Blunt trauma to the head",
+            CauseOfDeath = "Blunt trauma to the head from a wrench",
             TimeOfDeath = "Between 9 PM and midnight",
-            LastSeen = "Leaving the Theater after rehearsal",
-            IntroText = "In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. " +
+            LastSeen = "Leaving the Market with groceries",
+            IntroText = "In the quiet town of Larkspur Hollow, the body of Evelyn Cross, a beloved actress, is found dead in the park at dawn, a wrench lying nearby. " +
                 "The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something.",
             MurdererCharacterKey = "banker",
             SolutionConfirmation = "That's right. The prints on the wrench match the banker's. He killed her — and love was his undoing."
         };
         
         // Shared prompts for banker scenario
-        bankerScenario.SharedPrompts.Add("In the quiet town of Larkspur Hollow, an attractive little town, the body of Evelyn Cross, a beloved actress who once performed at the local theater, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. ");
-        bankerScenario.SharedPrompts.Add("Cause of Death: Blunt trauma to the head.");
+        bankerScenario.SharedPrompts.Add("In the quiet town of Larkspur Hollow, the body of Evelyn Cross, a beloved actress, is found dead in the park at dawn. The townsfolk whisper it was a crime of passion — but everyone seems to have been attracted to Evelyn in some way, and everyone's hiding something. The player must interview each character to uncover motives, lies, and secrets — and ultimately identify the killer. ");
+        bankerScenario.SharedPrompts.Add("Cause of Death: Blunt trauma to the head from a wrench.");
         bankerScenario.SharedPrompts.Add("Time of Death: Between 9 PM and midnight. ");
-        bankerScenario.SharedPrompts.Add("Last seen: Leaving the Theater after rehearsal. ");
+        bankerScenario.SharedPrompts.Add("Last seen: Leaving the Market with groceries. ");
         bankerScenario.SharedPrompts.Add("Theme: Each suspect's \"attraction\" (romantic, financial, power, or admiration) drove their behavior.");
         bankerScenario.SharedPrompts.Add("The key people and places in town are:\n\n" +
             "• Martin Harlow – Banker: Professional but nervous, secretly altered a loan for Evelyn and feared exposure.\n" +
@@ -72,17 +72,17 @@ public class StoryScenarioService
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Poisoning from arsenic",
             TimeOfDeath = "Between 10 PM and 1 AM",
-            LastSeen = "Having dinner at the Inn",
-            IntroText = "In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in her room at the Inn. " +
-                "The cause? Arsenic poisoning. Some insists it was suicide, but others whisper of scandal and secrets. ",
+            LastSeen = "Posting a letter at the Post Office",
+            IntroText = "In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in the church garden. " +
+                "The cause? Arsenic poisoning. Whispers of scandal and secrets fill the town square.",
             MurdererCharacterKey = "mayor",
             SolutionConfirmation = "You've uncovered the truth. The mayor, Ben Langford, poisoned Evelyn to protect his political career. The wine glass found in her room had his fingerprints — and traces of arsenic from his office. Power was his motive, silence was his method."
         };
         
-        mayorScenario.SharedPrompts.Add("In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in her room at the Inn. The cause? Arsenic poisoning. The mayor insists it was suicide, but townsfolk whisper of scandal. Evelyn had discovered something that could ruin powerful people — and someone silenced her. The player must interview each character to uncover the truth.");
+        mayorScenario.SharedPrompts.Add("In the picturesque town of Larkspur Hollow, tragedy strikes when Evelyn Cross, a beloved actress, is found dead in the church garden. The cause? Arsenic poisoning. Whispers of scandal and secrets fill the town. Evelyn had discovered something that could ruin powerful people — and someone silenced her. The player must interview each character to uncover the truth.");
         mayorScenario.SharedPrompts.Add("Cause of Death: Poisoning from arsenic.");
         mayorScenario.SharedPrompts.Add("Time of Death: Between 10 PM and 1 AM. ");
-        mayorScenario.SharedPrompts.Add("Last seen: Having dinner at the Inn. ");
+        mayorScenario.SharedPrompts.Add("Last seen: Posting a letter at the Post Office. ");
         mayorScenario.SharedPrompts.Add("Theme: Power corrupts, and secrets kill. Multiple people had motives, but only one had the means and ruthlessness.");
         mayorScenario.SharedPrompts.Add("The key people and places in town are:\n\n" +
             "• Ben Langford – Mayor: Publicly supportive of the investigation, but privately desperate to control the narrative. Has access to arsenic in his office.\n" +
@@ -119,21 +119,21 @@ public class StoryScenarioService
         var blacksmithScenario = new StoryScenario
         {
             Id = "blacksmith-murder",
-            Title = "Debt of Honor",
+            Title = "Murder Mystery #3",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Strangulation with iron chain",
             TimeOfDeath = "Between 11 PM and 2 AM",
-            LastSeen = "Walking toward the blacksmith's forge",
-            IntroText = "In the quiet town of Larkspur Hollow, Evelyn Cross's body is discovered behind the blacksmith's forge at dawn, an iron chain still wrapped around her neck. " +
-                "The blacksmith claims he was working late, but townsfolk whisper of unpaid debts and heated arguments. Someone's honor was at stake — and it cost Evelyn her life.",
+            LastSeen = "Browsing books at the Library",
+            IntroText = "In the quiet town of Larkspur Hollow, Evelyn Cross's body is discovered in the schoolyard, an iron chain still wrapped around her neck. " +
+                "The townsfolk whisper of unpaid debts and heated arguments. Someone's honor was at stake — and it cost Evelyn her life.",
             MurdererCharacterKey = "blacksmith",
             SolutionConfirmation = "You've solved it. The chain matches the blacksmith's forge. Hugo Brandt killed her when she threatened to expose his debts and ruin his reputation. Pride was his downfall."
         };
         
-        blacksmithScenario.SharedPrompts.Add("Evelyn Cross was found strangled with an iron chain behind the blacksmith's forge. Hugo Brandt owed her money and she threatened to tell everyone. The player must uncover who had both motive and means to kill her.");
+        blacksmithScenario.SharedPrompts.Add("Evelyn Cross was found strangled with an iron chain in the schoolyard. Hugo Brandt owed her money and she threatened to tell everyone. The player must uncover who had both motive and means to kill her.");
         blacksmithScenario.SharedPrompts.Add("Cause of Death: Strangulation with iron chain.");
         blacksmithScenario.SharedPrompts.Add("Time of Death: Between 11 PM and 2 AM.");
-        blacksmithScenario.SharedPrompts.Add("Last seen: Walking toward the blacksmith's forge.");
+        blacksmithScenario.SharedPrompts.Add("Last seen: Browsing books at the Library.");
         blacksmithScenario.SharedPrompts.Add("Theme: Pride and debt can be deadly. Someone couldn't bear the shame of exposure.");
         blacksmithScenario.SharedPrompts.Add("Don't be long-winded in your response. Focus on character motives and what they know about the blacksmith's financial troubles.");
         
@@ -156,21 +156,21 @@ public class StoryScenarioService
         var innkeeperScenario = new StoryScenario
         {
             Id = "innkeeper-murder",
-            Title = "Green-Eyed Monster",
+            Title = "Murder Mystery #4",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Pushed from Inn balcony",
+            CauseOfDeath = "Fatal fall from third-floor balcony",
             TimeOfDeath = "Between midnight and 2 AM",
-            LastSeen = "Having drinks at the Inn",
-            IntroText = "Evelyn Cross's broken body lies in the courtyard below the Inn's third-floor balcony. The innkeeper claims she jumped, but whispers of jealousy and betrayal fill the air. " +
-                "Evelyn was ending an affair — and someone couldn't let her go.",
+            LastSeen = "Attending late rehearsal at the Theater",
+            IntroText = "Evelyn Cross's broken body lies in the courtyard below the Inn's third-floor balcony. Whispers of jealousy and betrayal fill the air. " +
+                "Evelyn was tangled in affairs, financial concerns, and secrets.",
             MurdererCharacterKey = "innkeeper",
             SolutionConfirmation = "You've uncovered the truth. Lucas Vale pushed Evelyn from the balcony when she tried to end their affair and threatened to tell his wife. Jealousy and fear destroyed them both."
         };
         
-        innkeeperScenario.SharedPrompts.Add("Evelyn Cross died falling from the Inn balcony. Lucas Vale claims suicide, but she had no reason to jump. Someone pushed her. The player must find out who had motive and opportunity.");
+        innkeeperScenario.SharedPrompts.Add("Evelyn Cross died falling from the Inn balcony. Lucas Vale claims she jumped, but she had no reason to. Someone pushed her. The player must find out who had motive and opportunity.");
         innkeeperScenario.SharedPrompts.Add("Cause of Death: Fatal fall from third-floor balcony.");
         innkeeperScenario.SharedPrompts.Add("Time of Death: Between midnight and 2 AM.");
-        innkeeperScenario.SharedPrompts.Add("Last seen: Having drinks at the Inn.");
+        innkeeperScenario.SharedPrompts.Add("Last seen: Attending late rehearsal at the Theater.");
         innkeeperScenario.SharedPrompts.Add("Theme: Jealousy and obsession can turn love into murder.");
         innkeeperScenario.SharedPrompts.Add("Don't be long-winded. Focus on relationships and who was at the Inn that night.");
         
@@ -193,21 +193,21 @@ public class StoryScenarioService
         var bakerScenario = new StoryScenario
         {
             Id = "baker-murder",
-            Title = "Bitter Confections",
+            Title = "Murder Mystery #5",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Poisoned pastry (cyanide)",
+            CauseOfDeath = "Poisoned pastry containing cyanide",
             TimeOfDeath = "Between 8 AM and 10 AM",
-            LastSeen = "Leaving the bakery with a pastry",
-            IntroText = "Evelyn Cross collapses in the park after eating a pastry from the bakery, foam at her lips. Cyanide poisoning. The sweet baker Clara Finch seems incapable of murder, " +
-                "but desperation makes people do terrible things. Someone's secret was worth killing for.",
+            LastSeen = "Walking through the Park",
+            IntroText = "Evelyn Cross collapses near the fountain after eating a pastry, foam at her lips. Cyanide poisoning. " +
+                "Someone was willing to kill Evelyn for what she knew or what she threatened to reveal.",
             MurdererCharacterKey = "baker",
             SolutionConfirmation = "You've discovered the truth. Clara Finch poisoned the pastry. Evelyn discovered Clara had been embezzling from the church charity fund, and threatened to expose her. Fear drove her to murder."
         };
         
-        bakerScenario.SharedPrompts.Add("Evelyn Cross died from cyanide poisoning in a pastry from the bakery. Clara Finch seems too sweet to kill, but she had access and opportunity. Find out who had a motive.");
+        bakerScenario.SharedPrompts.Add("Evelyn Cross died from cyanide poisoning in a pastry. Clara Finch had access and opportunity. Find out who had a motive.");
         bakerScenario.SharedPrompts.Add("Cause of Death: Cyanide poisoning.");
         bakerScenario.SharedPrompts.Add("Time of Death: Between 8 AM and 10 AM.");
-        bakerScenario.SharedPrompts.Add("Last seen: Leaving the bakery with a pastry.");
+        bakerScenario.SharedPrompts.Add("Last seen: Walking through the Park.");
         bakerScenario.SharedPrompts.Add("Theme: Even the kindest people can kill when desperate to protect a secret.");
         bakerScenario.SharedPrompts.Add("Focus on the baker's financial troubles and what Evelyn knew.");
         
@@ -230,21 +230,21 @@ public class StoryScenarioService
         var librarianScenario = new StoryScenario
         {
             Id = "librarian-murder",
-            Title = "Silenced Stories",
+            Title = "Murder Mystery #6",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Struck with heavy bookend",
+            CauseOfDeath = "Struck with heavy bronze bookend",
             TimeOfDeath = "Between 7 PM and 9 PM",
-            LastSeen = "Entering the library",
-            IntroText = "Evelyn Cross lies dead in the library's restricted section, a bronze bookend beside her bloodied head. The elderly librarian Mildred Gray, who knows everyone's secrets, " +
-                "had one secret too dangerous to let escape. Sometimes the quiet ones are the most dangerous.",
+            LastSeen = "Having tea at the Bakery",
+            IntroText = "Evelyn Cross lies dead in an alley behind the Town Hall, a bronze bookend beside her bloodied head. The elderly librarian Mildred Gray, who knows everyone's secrets, " +
+                "had one secret too dangerous to let escape.",
             MurdererCharacterKey = "librarian",
             SolutionConfirmation = "You've solved it. Mildred Gray killed Evelyn with the bookend. Evelyn discovered that Mildred had been selling rare books from the library's collection to pay gambling debts. Knowledge is power — and deadly when exposed."
         };
         
-        librarianScenario.SharedPrompts.Add("Evelyn Cross was killed in the library with a bookend. The librarian knows everyone's secrets — but someone discovered hers. Find out what Evelyn knew that got her killed.");
+        librarianScenario.SharedPrompts.Add("Evelyn Cross was killed with a bookend. The librarian knows everyone's secrets — but someone discovered hers. Find out what Evelyn knew that got her killed.");
         librarianScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma from bronze bookend.");
         librarianScenario.SharedPrompts.Add("Time of Death: Between 7 PM and 9 PM.");
-        librarianScenario.SharedPrompts.Add("Last seen: Entering the library.");
+        librarianScenario.SharedPrompts.Add("Last seen: Having tea at the Bakery.");
         librarianScenario.SharedPrompts.Add("Theme: Those who keep secrets for a living have the most to hide.");
         librarianScenario.SharedPrompts.Add("Focus on what the librarian was hiding and missing library items.");
         
@@ -267,21 +267,21 @@ public class StoryScenarioService
         var postmanScenario = new StoryScenario
         {
             Id = "postman-murder",
-            Title = "Deadly Delivery",
+            Title = "Murder Mystery #7",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Stabbed with letter opener",
             TimeOfDeath = "Between 6 PM and 8 PM",
-            LastSeen = "At the Post Office",
-            IntroText = "Evelyn Cross's body is found in the back room of the Post Office, a bloody letter opener beside her. The cynical postal worker Edwin Pike claims he found her, " +
-                "but he's made a career of reading other people's mail and using their secrets. This time, someone fought back.",
+            LastSeen = "Meeting someone at the Church",
+            IntroText = "Evelyn Cross's body is found in the park near the fountain, a bloody letter opener beside her. The cynical postal worker Edwin Pike had access to everyone's secrets through their mail. " +
+                "This time, someone's secrets proved deadly.",
             MurdererCharacterKey = "postman",
             SolutionConfirmation = "You've got him. Edwin Pike killed Evelyn when she threatened to report him for blackmail and mail tampering. He'd been extorting people for years using their private letters. She was going to end it."
         };
         
-        postmanScenario.SharedPrompts.Add("Evelyn Cross was stabbed at the Post Office. Edwin Pike has access to everyone's mail and secrets. Someone was being blackmailed and decided to fight back — or was the blackmailer himself the killer?");
+        postmanScenario.SharedPrompts.Add("Evelyn Cross was stabbed with a letter opener. Edwin Pike has access to everyone's mail and secrets. Someone was being blackmailed and decided to fight back — or was the blackmailer himself the killer?");
         postmanScenario.SharedPrompts.Add("Cause of Death: Stabbed with letter opener.");
         postmanScenario.SharedPrompts.Add("Time of Death: Between 6 PM and 8 PM.");
-        postmanScenario.SharedPrompts.Add("Last seen: At the Post Office.");
+        postmanScenario.SharedPrompts.Add("Last seen: Meeting someone at the Church.");
         postmanScenario.SharedPrompts.Add("Theme: Knowledge of secrets can be profitable — and fatal.");
         postmanScenario.SharedPrompts.Add("Focus on mail tampering, blackmail, and who was being extorted.");
         
@@ -304,13 +304,13 @@ public class StoryScenarioService
         var teacherScenario = new StoryScenario
         {
             Id = "teacher-murder",
-            Title = "Lessons in Betrayal",
+            Title = "Murder Mystery #8",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Drowned in school fountain",
+            CauseOfDeath = "Drowned in water",
             TimeOfDeath = "Between 5 PM and 7 PM",
-            LastSeen = "Meeting someone at the school",
-            IntroText = "Evelyn Cross's body floats in the school's courtyard fountain. The compassionate teacher Lydia Rowe discovered her, but teachers protect their students fiercely — " +
-                "even if it means crossing moral lines. Some secrets are worth killing to keep buried.",
+            LastSeen = "Shopping at the Market",
+            IntroText = "Evelyn Cross's body is found in the school's courtyard fountain. The compassionate teacher Lydia Rowe discovered her, but teachers protect fiercely — " +
+                "even if it means crossing moral lines.",
             MurdererCharacterKey = "teacher",
             SolutionConfirmation = "You've uncovered the truth. Lydia Rowe drowned Evelyn in the fountain. Evelyn discovered that Lydia had been covering up abuse by her brother, the former principal. To protect her family's name, she silenced Evelyn forever."
         };
@@ -318,7 +318,7 @@ public class StoryScenarioService
         teacherScenario.SharedPrompts.Add("Evelyn Cross was drowned in the school fountain. The teacher seems caring and innocent, but she guards a family secret. Find out what Evelyn discovered that was worth killing for.");
         teacherScenario.SharedPrompts.Add("Cause of Death: Drowning.");
         teacherScenario.SharedPrompts.Add("Time of Death: Between 5 PM and 7 PM.");
-        teacherScenario.SharedPrompts.Add("Last seen: Meeting someone at the school.");
+        teacherScenario.SharedPrompts.Add("Last seen: Shopping at the Market.");
         teacherScenario.SharedPrompts.Add("Theme: Family loyalty can drive good people to do terrible things.");
         teacherScenario.SharedPrompts.Add("Focus on the teacher's family history and what Evelyn was investigating.");
         
@@ -341,13 +341,13 @@ public class StoryScenarioService
         var theaterScenario = new StoryScenario
         {
             Id = "theater-murder",
-            Title = "Final Curtain",
+            Title = "Murder Mystery #9",
             VictimName = "Evelyn Cross",
-            CauseOfDeath = "Pushed from theater catwalk",
+            CauseOfDeath = "Fatal fall from theater catwalk",
             TimeOfDeath = "Between 10 PM and midnight",
-            LastSeen = "Rehearsing at the theater",
-            IntroText = "Evelyn Cross lies broken on the theater stage, having fallen from the catwalk high above. The shy ticket taker Hazel Dean discovered her, but admiration can twist into obsession. " +
-                "When a fan's love is rejected, the spotlight can become a death trap.",
+            LastSeen = "Dining at the Inn",
+            IntroText = "Evelyn Cross lies broken on the theater stage, having fallen from the catwalk high above. Admiration can twist into obsession. " +
+                "When love is rejected, tragedy follows.",
             MurdererCharacterKey = "theater",
             SolutionConfirmation = "You've solved it. Hazel Dean pushed Evelyn from the catwalk. Her admiration turned to obsession, and when Evelyn rejected her advances and planned to leave theater forever, Hazel snapped. If she couldn't have Evelyn, no one could."
         };
@@ -355,7 +355,7 @@ public class StoryScenarioService
         theaterScenario.SharedPrompts.Add("Evelyn Cross fell from the theater catwalk to her death. Was it an accident, or did someone push her? The shy theater worker seems harmless, but obsession can be deadly.");
         theaterScenario.SharedPrompts.Add("Cause of Death: Fatal fall from catwalk.");
         theaterScenario.SharedPrompts.Add("Time of Death: Between 10 PM and midnight.");
-        theaterScenario.SharedPrompts.Add("Last seen: Rehearsing at the theater.");
+        theaterScenario.SharedPrompts.Add("Last seen: Dining at the Inn.");
         theaterScenario.SharedPrompts.Add("Theme: Admiration can become obsession, and rejection can turn love into murder.");
         theaterScenario.SharedPrompts.Add("Focus on the theater worker's relationship with Evelyn and signs of obsession.");
         
@@ -378,21 +378,21 @@ public class StoryScenarioService
         var preacherScenario = new StoryScenario
         {
             Id = "preacher-murder",
-            Title = "False Prophet",
+            Title = "Murder Mystery #10",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Strangled with rosary beads",
             TimeOfDeath = "Between 9 PM and 11 PM",
-            LastSeen = "Going to the church",
-            IntroText = "Evelyn Cross's body is found in the church confessional, strangled with rosary beads. The gentle Father Thomas Alder speaks only in parables, but righteous men can commit unrighteous acts. " +
-                "When faith is tested and hypocrisy exposed, even a man of God can become a killer.",
+            LastSeen = "Visiting the Town Hall",
+            IntroText = "Evelyn Cross's body is found behind the blacksmith's forge, strangled with rosary beads. The gentle Father Thomas Alder speaks only in parables, but righteous men can commit unrighteous acts. " +
+                "When faith is tested and hypocrisy exposed, even a man of God can fall.",
             MurdererCharacterKey = "church",
             SolutionConfirmation = "You've discovered the truth. Father Thomas Alder strangled Evelyn with rosary beads when she threatened to expose his embezzlement of church funds and his secret family. His piety was a mask for sin."
         };
         
-        preacherScenario.SharedPrompts.Add("Evelyn Cross was strangled in the church with rosary beads. The preacher seems godly and gentle, but she discovered his sins. Find out what secret was worth killing to protect.");
+        preacherScenario.SharedPrompts.Add("Evelyn Cross was strangled with rosary beads. The preacher seems godly and gentle, but she discovered his sins. Find out what secret was worth killing to protect.");
         preacherScenario.SharedPrompts.Add("Cause of Death: Strangulation with rosary beads.");
         preacherScenario.SharedPrompts.Add("Time of Death: Between 9 PM and 11 PM.");
-        preacherScenario.SharedPrompts.Add("Last seen: Going to the church for confession.");
+        preacherScenario.SharedPrompts.Add("Last seen: Visiting the Town Hall.");
         preacherScenario.SharedPrompts.Add("Theme: The most righteous appearance can hide the darkest sins.");
         preacherScenario.SharedPrompts.Add("Focus on church finances and the preacher's past.");
         
@@ -415,21 +415,21 @@ public class StoryScenarioService
         var marketScenario = new StoryScenario
         {
             Id = "market-murder",
-            Title = "Fatal Transaction",
+            Title = "Murder Mystery #11",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Struck by falling crates",
             TimeOfDeath = "Between 4 PM and 6 PM",
-            LastSeen = "Shopping at the market",
-            IntroText = "Evelyn Cross lies crushed beneath heavy crates in the market storage room. The chatty clerk Nina Holst claims it was an accident, but witnesses heard arguing. " +
-                "Sometimes accidents are made to happen, and the most talkative people have the most to hide.",
+            LastSeen = "Leaving the Post Office",
+            IntroText = "Evelyn Cross lies crushed beneath heavy crates near the market storage room. The chatty clerk Nina Holst claims it was an accident, but witnesses heard arguing. " +
+                "Sometimes accidents are carefully arranged.",
             MurdererCharacterKey = "marketclerk",
             SolutionConfirmation = "You've solved it. Nina Holst pushed the crates onto Evelyn deliberately. Evelyn discovered Nina had been overcharging customers and pocketing the difference for years. To protect her theft scheme, she staged a deadly accident."
         };
         
-        marketScenario.SharedPrompts.Add("Evelyn Cross was killed by falling crates at the market. The clerk says it was an accident, but Evelyn was investigating theft. Find out if someone made this accident happen.");
+        marketScenario.SharedPrompts.Add("Evelyn Cross was killed by falling crates near the market. The clerk says it was an accident, but Evelyn was investigating theft. Find out if someone made this accident happen.");
         marketScenario.SharedPrompts.Add("Cause of Death: Blunt force trauma from falling crates.");
         marketScenario.SharedPrompts.Add("Time of Death: Between 4 PM and 6 PM.");
-        marketScenario.SharedPrompts.Add("Last seen: Shopping at the market.");
+        marketScenario.SharedPrompts.Add("Last seen: Leaving the Post Office.");
         marketScenario.SharedPrompts.Add("Theme: Small thefts can lead to big crimes when discovery threatens.");
         marketScenario.SharedPrompts.Add("Focus on market finances and customer complaints.");
         
@@ -452,13 +452,13 @@ public class StoryScenarioService
         var policeScenario = new StoryScenario
         {
             Id = "police-murder",
-            Title = "Badge of Dishonor",
+            Title = "Murder Mystery #12",
             VictimName = "Evelyn Cross",
             CauseOfDeath = "Shot with service weapon",
             TimeOfDeath = "Between 1 AM and 3 AM",
-            LastSeen = "Walking home from the theater",
-            IntroText = "Evelyn Cross is found shot dead near the park, killed with a police-issue weapon. Officer Grant Miles claims he was on patrol and found her, but the protector became the predator. " +
-                "When the law itself breaks, who can bring justice? Someone who enforces the rules decided they didn't apply to him.",
+            LastSeen = "Attending church service",
+            IntroText = "Evelyn Cross is found shot dead in an alley near the bank, killed with a police-issue weapon. Officer Grant Miles claims he was on patrol and found her. " +
+                "When the law itself breaks, who can bring justice?",
             MurdererCharacterKey = "police",
             SolutionConfirmation = "You've uncovered the truth. Officer Grant Miles shot Evelyn with his service weapon. She discovered he'd been taking bribes and covering up crimes for the mayor. He killed her to protect his corrupt partnership and reputation."
         };
@@ -466,7 +466,7 @@ public class StoryScenarioService
         policeScenario.SharedPrompts.Add("Evelyn Cross was shot with a police weapon. The officer investigating claims he found her, but she was exposing police corruption. Find out if the enforcer of justice became the criminal.");
         policeScenario.SharedPrompts.Add("Cause of Death: Gunshot from police service weapon.");
         policeScenario.SharedPrompts.Add("Time of Death: Between 1 AM and 3 AM.");
-        policeScenario.SharedPrompts.Add("Last seen: Walking home from the theater.");
+        policeScenario.SharedPrompts.Add("Last seen: Attending church service.");
         policeScenario.SharedPrompts.Add("Theme: Those who enforce the law can be the most dangerous when they break it.");
         policeScenario.SharedPrompts.Add("Focus on police corruption and Evelyn's investigation into official misconduct.");
         

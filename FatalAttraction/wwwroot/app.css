@@ -130,6 +130,14 @@ td, th {
     border-color: #3a1010 !important;
 }
 
+/* Character images - default desktop sizing */
+.character-image {
+    max-width: 200px;
+    float: left;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+}
+
 /* Responsive Design for Mobile and Narrow Browser Windows */
 @media (max-width: 768px) {
     /* Stack conversation and notes vertically on mobile */

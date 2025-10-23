@@ -129,3 +129,120 @@ td, th {
     color: #d0d0d0 !important;
     border-color: #3a1010 !important;
 }
+
+/* Responsive Design for Mobile and Narrow Browser Windows */
+@media (max-width: 768px) {
+    /* Stack conversation and notes vertically on mobile */
+    .conversation-layout {
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+    
+    /* Make conversation history take more space on mobile */
+    .conversation-card {
+        flex: 1 1 auto !important;
+        min-height: 250px !important;
+    }
+    
+    /* Make case notes smaller on mobile */
+    .notes-card {
+        flex: 0 0 auto !important;
+        min-height: 150px !important;
+    }
+    
+    /* Adjust button layout for mobile */
+    .button-row {
+        flex-wrap: wrap !important;
+        gap: 0.25rem !important;
+    }
+    
+    .button-row button {
+        flex: 1 1 auto !important;
+        min-width: 120px !important;
+        font-size: 0.875rem !important;
+    }
+    
+    /* Make images responsive */
+    .character-image {
+        max-width: 150px !important;
+        float: none !important;
+        display: block !important;
+        margin: 0 auto 1rem auto !important;
+    }
+    
+    /* Adjust main container height for mobile */
+    .main-container {
+        height: 70vh !important;
+    }
+    
+    /* Make textarea smaller on mobile */
+    .message-input {
+        max-height: 15vh !important;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Extra small screens - phone portrait */
+    .button-row {
+        flex-direction: column !important;
+    }
+    
+    .button-row button {
+        width: 100% !important;
+        min-width: unset !important;
+    }
+    
+    .character-image {
+        max-width: 120px !important;
+    }
+    
+    .main-container {
+        height: 75vh !important;
+    }
+    
+    /* Reduce padding on small screens */
+    .card-body {
+        padding: 0.5rem !important;
+    }
+    
+    .card-header {
+        padding: 0.5rem !important;
+        font-size: 0.875rem !important;
+    }
+}
+
+@media (max-width: 992px) and (min-width: 769px) {
+    /* Tablet layout - keep side by side but adjust proportions */
+    .conversation-card {
+        flex: 1.5 1 0 !important;
+    }
+    
+    .notes-card {
+        flex: 1 1 0 !important;
+    }
+}
+
+/* Landscape phone orientation */
+@media (max-width: 896px) and (orientation: landscape) {
+    .main-container {
+        height: 60vh !important;
+    }
+    
+    .message-input {
+        max-height: 12vh !important;
+    }
+}
+
+/* Utility classes for responsive layout */
+.responsive-flex {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .responsive-flex {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

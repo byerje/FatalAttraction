@@ -12,11 +12,11 @@
 
 <h1>Theater</h1>
 
-<img src="/images/ticket-taker.png" alt="Hazel Dean" class="img-fluid rounded float-start me-3 mb-2" style="max-width:200px;" />
+<img src="/images/ticket-taker.png" alt="Hazel Dean" class="img-fluid rounded character-image" />
 
 <p>Talk to the theater's ticket taker, Miss Hazel Dean.</p>
 
-<div style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
+<div class="main-container" style="display:flex; flex-direction:column; height:65vh; gap:0.5rem;">
     @if (!string.IsNullOrEmpty(ttsError))
     {
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -26,14 +26,14 @@
     }
     
     <div style="flex:0 0 auto; display:flex; flex-direction:column; gap:0.25rem;">
-        <textarea class="form-control"
+        <textarea class="form-control message-input"
           style="flex:1 1 auto; resize:vertical; max-height:20vh;"
           @bind="message"
           @bind:event="oninput"
           @ref="messageInput"
           @onkeydown="HandleKeyDown"
           placeholder="Speak or type your question and click the Ask button..."></textarea>
-        <div style="display:flex; gap:0.5rem; justify-content:flex-start;">
+        <div class="button-row" style="display:flex; gap:0.5rem; justify-content:flex-start;">
             <button class="btn btn-primary" style="min-width:140px;" @onclick="Submit" @ref="askButton">Ask</button>
             <button class="btn @(isListening ? "btn-warning" : "btn-info")" style="min-width:140px;" @onclick="ToggleSpeechRecognition">
                 @(isListening ? "🎤 Listening..." : "🎤 Speak")
@@ -50,9 +50,9 @@
     </div>
 
     <!-- Two-column region: Conversation (left) + Case Notes (right) -->
-    <div style="flex:1 1 auto; display:flex; gap:0.75rem; min-height:0;">
+    <div class="conversation-layout responsive-flex" style="flex:1 1 auto; min-height:0;">
         <!-- Conversation Card -->
-        <div class="card shadow-sm" style="flex:2 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
+        <div class="card shadow-sm conversation-card" style="flex:2 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
             <div class="card-header fw-semibold">
                 Conversation History:
             </div>
@@ -76,7 +76,7 @@
         </div>
 
         <!-- Case Notes Card -->
-        <div class="card shadow-sm" style="flex:1 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
+        <div class="card shadow-sm notes-card" style="flex:1 1 0; display:flex; flex-direction:column; border-radius:0.5rem; min-height:0;">
             <div class="card-header fw-semibold">
                 Case Notes:
             </div>

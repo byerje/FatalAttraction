@@ -163,6 +163,10 @@
                 }
                 history.AddAssistantMessage(response);
                 convo.Add(("assistant", response));
+                
+                // Check if this response indicates the case is solved
+                ChatState.CheckIfCaseSolved(response);
+                
                 await InvokeAsync(StateHasChanged);
                 
             // Play the speech after response is complete

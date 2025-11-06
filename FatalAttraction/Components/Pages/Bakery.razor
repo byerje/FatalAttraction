@@ -204,6 +204,8 @@
 
     private async Task StopSpeech()
     {
+        if (!isInteractiveRendered) return;
+        
         try
         {
             await JS.InvokeVoidAsync("ttsPlayer.stop");
@@ -257,6 +259,8 @@
 
     private async Task StopListening()
     {
+        if (!isInteractiveRendered) return;
+        
         try
         {
             await JS.InvokeVoidAsync("speechRecognition.stopListening");
